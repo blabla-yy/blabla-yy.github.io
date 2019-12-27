@@ -12,4 +12,5 @@ tags:
 - spf13-vim
 - vim
 title: world
+draft: false
 ---
