@@ -8,17 +8,17 @@
 
 <meta property='og:title' content='Java中的异步Http请求：HttpClient分析与使用优化事项 - 一个为起名字很愁恼的人的博客'>
 <meta property='og:description' content='JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）'>
-<meta property='og:url' content='/posts/httpclient/'>
+<meta property='og:url' content='https://qaqadrian.github.io/posts/httpclient/'>
 <meta property='og:site_name' content='一个为起名字很愁恼的人的博客'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0639901299a00cf0d596bb2d0eb95aef?s=256'><meta property='article:section' content='Posts'><meta property='article:tag' content='Java'><meta property='article:tag' content='Async'><meta property='article:published_time' content='2012-04-06T00:00:00Z'/><meta property='article:modified_time' content='2012-04-06T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
 
 
-<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='https://qaqadrian.github.io/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="canonical" href="/posts/httpclient/">
+<link rel="canonical" href="https://qaqadrian.github.io/posts/httpclient/">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
 </head>
@@ -27,7 +27,7 @@
   <div class="container">
     <nav id="nav-main" class="nav">
       <div id="nav-name" class="nav-left">
-        <a id="nav-anchor" class="nav-item" href="">
+        <a id="nav-anchor" class="nav-item" href="https://qaqadrian.github.io">
           <h1 id="nav-heading" class="title is-4">一个为起名字很愁恼的人的博客</h1>
         </a>
       </div>

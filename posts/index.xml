@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 一个为起名字很愁恼的人的博客</title>
-    <link>/posts/</link>
+    <link>https://qaqadrian.github.io/posts/</link>
     <description>Recent content in Posts on 一个为起名字很愁恼的人的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/QaQAdrian&#34;&gt;QaQAdrian&lt;/a&gt; 2019</copyright>
     <lastBuildDate>Fri, 06 Apr 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://qaqadrian.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java中的异步Http请求：HttpClient分析与使用优化事项</title>
-      <link>/posts/httpclient/</link>
+      <link>https://qaqadrian.github.io/posts/httpclient/</link>
       <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>/posts/httpclient/</guid>
+      <guid>https://qaqadrian.github.io/posts/httpclient/</guid>
       <description>&lt;p&gt;JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）&lt;/p&gt;</description>
     </item>
     
