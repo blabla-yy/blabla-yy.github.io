@@ -1,22 +1,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>一个为起名字很愁恼的人的博客</title>
-    <link>https://qaqadrian.github.io/</link>
+    <link>/</link>
     <description>Recent content on 一个为起名字很愁恼的人的博客</description>
     <generator>Hugo - gohugo.io</generator>
     <language>en</language>
     <contact></contact>
     <copyright>&copy; <a href="https://github.com/QaQAdrian">QaQAdrian</a> 2019</copyright>
     
-        <atom:link href="https://qaqadrian.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Posts</title>
-      <link>https://qaqadrian.github.io/posts/</link>
+      <link>/posts/</link>
       <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
       <author></author>
-      <guid>https://qaqadrian.github.io/posts/</guid>
+      <guid>/posts/</guid>
       <description></description>
       
     </item>

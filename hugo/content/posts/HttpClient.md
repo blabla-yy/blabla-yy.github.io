@@ -3,7 +3,7 @@ categories:
   - Java
 date: "2012-04-06"
 description: ""
-slug: slug
+# slug: 
 tags:
   - Java
   - Async

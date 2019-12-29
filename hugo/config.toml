@@ -1,5 +1,5 @@
 
-baseurl = "https://qaqadrian.github.io"
+# baseurl = "https://qaqadrian.github.io"
 languageCode = "zh"
 title = "一个为起名字很愁恼的人的博客"
 theme = "kiss"
