@@ -1,0 +1,25 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>一个为起名字很愁恼的人的博客</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on 一个为起名字很愁恼的人的博客</description>
+    <generator>Hugo - gohugo.io</generator>
+    <language>en</language>
+    <contact></contact>
+    <copyright>&copy; <a href="https://github.com/QaQAdrian">QaQAdrian</a> 2019</copyright>
+    
+        <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Posts</title>
+      <link>http://localhost:1313/posts/</link>
+      <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
+      <author></author>
+      <guid>http://localhost:1313/posts/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

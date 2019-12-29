@@ -1,52 +1,43 @@
-# baseURL = "http://example.org/"
-# languageCode = "en-us"
-# title = "My New Hugo Site"
 
-baseURL = "https://example.com"
-title = "Blog"
-theme = "hugo-notepadium"
-copyright = "©2019 QaQAdrain."
-
-languageCode = "zh-cn"
-hasCJKLanguage = true
-
+baseurl = "https://example.com"
+languageCode = "zh"
+title = "一个为起名字很愁恼的人的博客"
+theme = "kiss"
+copyright = "&copy; <a href=\"https://github.com/QaQAdrian\">QaQAdrian</a> 2019"
+# disqusShortname = "shortname"
+# googleAnalytics = ""
+Paginate = 5 # Number of posts per page
 enableRobotsTXT = true
-
 publishDir = ".."
 
-# Enable Disqus
-# disqusShortname = "XXX"
 
-[markup.highlight]
-codeFences = true
-noClasses = false
+[params.assets]
+customCSS = ["css/custom.css"]
 
-[markup.goldmark.renderer]
-unsafe = true  # enable raw HTML in Markdown
+[params.info]
+adsense = "" # Adsense ID (ID only, without ca-pub-)
+enableSocial = true # Adds OpenGraph and Twitter cards
+homeTitle = "Hello" # Title for home page
+poweredby = true # Adds powered by hugo and kiss below Copyright
+related = true # Includes related articles at the bottom of the article
+codeCopy = true # Add copy button above code blocks
 
-[params]
-logo = ""  # if you have a logo png
-# slogan = "is a slogan"
-license = ""  # CC License
+# [params.features]
+# disqusOnDemand = true  # Load Disqus comments on click
 
-[params.MathJax]
-url = ""  # builtin: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+[params.social]
+github = "QaQAdrian"
+email = "yahaha7777@gmail.com"
 
-[params.syntax]
-use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
-theme = "dracula"
-webFonts = true  # builtin: 'Source Code Pro'
+[params.social.config]
+platforms = ["github","email"]
 
-[params.nav]
-showCategories = true       # /categories/
-showTags = true             # /tags/
+# [params.matomoAnalytics]
+# siteID = 1
+# rootURL = "//matomo.example.com/"
 
-# custom navigation items
+[taxonomies]
+tag ="tags"
 
-# [[params.nav.custom]]
-# title = "About"
-# url = "/about"
-
-# [[params.nav.custom]]
-# title = "Hugo"
-# url = "https://gohugo.io/"
+# [blackfriday]
+# hrefTargetBlank = true

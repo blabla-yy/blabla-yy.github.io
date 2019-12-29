@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: 
-Disallow: /css/
-Disallow: /js/
-Sitemap: /sitemap.xml
