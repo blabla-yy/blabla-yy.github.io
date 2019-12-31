@@ -13,7 +13,7 @@ title: Java中的异步Http请求：HttpClient分析与使用优化事项
 draft: false
 ---
 
-JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）
+JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）
 <!--more-->
 ## 一、简单使用
 ```java
@@ -25,13 +25,11 @@ var request = HttpRequest.newBuilder()
 client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
   .thenAccept(System.out::println)
 ```
-但是当我们阅读了HttpClient源码后，会发现这种使用方式，会有很多问题。
 
 ## 二、异步相关的核心类
-JDK9以后提供的类都已经按照Java Module使用模式进行模块化划分。java.net.http模块中以HttpClient是核心抽象类，他的实现类和相关工具都无法直接调用。
 
 ### 1、HttpClientImpl
-HttpClient实现类，在读java.net.http源码时，你会发现HttpClientImpl的引用无处不在......
+HttpClient实现类
 - HttpClient默认构造的线程池是通过Executors.newCachedThreadPool构造的，其线程数最大值为Integer.MAX_VALUE，核心线程数为0。这意味着如果我们 __短时间内发送大量请求时，会创建过多的线程__ ，影响性能。我们应当根据情况适当优化线程池配置。线程池构造源码如下：
   ```java       
   Executor ex = builder.executor;
@@ -50,20 +48,6 @@ SelectorMangager顾名思义，管理Selector操作，用于事件监听，是Ht
 - 当HttpClient实例创建完成后，SelectorManager实例便start运行
 - 每当HttpClientImpl创建时，便会启动SelectorManager线程，__多HttpClient实例多SelectorManager线程__
 
-<!-- ### 3、DelegatingExecutor
-线程池的封装类型
-- 当由SelectorManager线程调用execute()方法时，会启用线程池；反之则线性执行。
-  ```java
-  @Override
-  public void execute(Runnable command) {
-      if (isInSelectorThread.getAsBoolean()) {
-          delegate.execute(command);
-      } else {
-          command.run();
-      }
-  }
-  ```
-  -->
 ### 3、SocketTube
 实现Java9 Flow API中Publisher和Subscriber接口，为HttpClient提供响应式、异步处理Socket事件操作。
 
@@ -221,7 +205,7 @@ i：4 = ForkJoinPool.commonPool-worker-3
 这5个线程中包含主线程(Main)，信号检测线程(Monitor Ctrl-Break)，SelectorManager，我们定义的线程池，还有ForkJoinPool的线程（CompletableFuture默认使用，可以看出ID已经增长到了3）。其他使用情况均创建大量线程，且并没有提高并发能力。
 
 ## 四、总结
-我们使用HttpClient + CompletableFuture，即NIO + 任务调度，同样可以做到其他语言中协程并发请求的效果。但是为了达到更高时间和空间效率，我们应当注意几点：
+HttpClient是通过Java NIO、Flow模式进行并发请求以及任务调度，同样可以做到其他语言中协程并发请求的效果。但是为了达到更高时间和空间效率，我们应当注意几点：
 1. 不要重复创建多余的HttpClient实例
 2. 自定义线程池，否则默认提供的线程池会创建大量线程，且线程利用率很低。
 
