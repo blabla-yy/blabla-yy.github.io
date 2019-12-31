@@ -7,7 +7,7 @@
 <title>Java中的异步Http请求：HttpClient分析与使用优化事项 | 一个为起名字很愁恼的人的博客</title>
 
 <meta property='og:title' content='Java中的异步Http请求：HttpClient分析与使用优化事项 - 一个为起名字很愁恼的人的博客'>
-<meta property='og:description' content='JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）'>
+<meta property='og:description' content='JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）'>
 <meta property='og:url' content='https://qaqadrian.github.io/posts/httpclient/'>
 <meta property='og:site_name' content='一个为起名字很愁恼的人的博客'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/0639901299a00cf0d596bb2d0eb95aef?s=256'><meta property='article:section' content='Posts'><meta property='article:tag' content='Java'><meta property='article:tag' content='Async'><meta property='article:published_time' content='2019-12-30T00:00:00Z'/><meta property='article:modified_time' content='2019-12-30T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
@@ -83,7 +83,7 @@
     <h1 class="title">Java中的异步Http请求：HttpClient分析与使用优化事项</h1>
     
     <div class="content">
-      <p>JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）</p>
+      <p>JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）</p>
 <h2 id="heading">一、简单使用</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var client <span style="color:#f92672">=</span> HttpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">newHttpClient</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 var request <span style="color:#f92672">=</span> HttpRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">newBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span>
@@ -92,11 +92,9 @@ var request <span style="color:#f92672">=</span> HttpRequest<span style="color:#
                 <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
 client<span style="color:#f92672">.</span><span style="color:#a6e22e">sendAsync</span><span style="color:#f92672">(</span>request<span style="color:#f92672">,</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">BodyHandlers</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ofString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span>
   <span style="color:#f92672">.</span><span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>println<span style="color:#f92672">)</span>
-</code></pre></div><p>但是当我们阅读了HttpClient源码后，会发现这种使用方式，会有很多问题。</p>
-<h2 id="heading-1">二、异步相关的核心类</h2>
-<p>JDK9以后提供的类都已经按照Java Module使用模式进行模块化划分。java.net.http模块中以HttpClient是核心抽象类，他的实现类和相关工具都无法直接调用。</p>
+</code></pre></div><h2 id="heading-1">二、异步相关的核心类</h2>
 <h3 id="1httpclientimpl">1、HttpClientImpl</h3>
-<p>HttpClient实现类，在读java.net.http源码时，你会发现HttpClientImpl的引用无处不在&hellip;&hellip;</p>
+<p>HttpClient实现类</p>
 <ul>
 <li>HttpClient默认构造的线程池是通过Executors.newCachedThreadPool构造的，其线程数最大值为Integer.MAX_VALUE，核心线程数为0。这意味着如果我们 <strong>短时间内发送大量请求时，会创建过多的线程</strong> ，影响性能。我们应当根据情况适当优化线程池配置。线程池构造源码如下：
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Executor ex <span style="color:#f92672">=</span> builder<span style="color:#f92672">.</span><span style="color:#a6e22e">executor</span><span style="color:#f92672">;</span>
@@ -116,8 +114,6 @@ client<span style="color:#f92672">.</span><span style="color:#a6e22e">sendAsync<
 <li>当HttpClient实例创建完成后，SelectorManager实例便start运行</li>
 <li>每当HttpClientImpl创建时，便会启动SelectorManager线程，<strong>多HttpClient实例多SelectorManager线程</strong></li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 <h3 id="3sockettube">3、SocketTube</h3>
 <p>实现Java9 Flow API中Publisher和Subscriber接口，为HttpClient提供响应式、异步处理Socket事件操作。</p>
 <h2 id="httpclient">三、HttpClient线程测试分析</h2>
@@ -257,7 +253,7 @@ i：4 = ForkJoinPool.commonPool-worker-3
 </code></pre></div><p>结束前 <strong>线程数仅为5，耗时仅为2s9ms</strong> 便完成了100个请求。 （这5个线程并不是在期间总产生数量，而是运行结束前的数量）
 这5个线程中包含主线程(Main)，信号检测线程(Monitor Ctrl-Break)，SelectorManager，我们定义的线程池，还有ForkJoinPool的线程（CompletableFuture默认使用，可以看出ID已经增长到了3）。其他使用情况均创建大量线程，且并没有提高并发能力。</p>
 <h2 id="heading-5">四、总结</h2>
-<p>我们使用HttpClient + CompletableFuture，即NIO + 任务调度，同样可以做到其他语言中协程并发请求的效果。但是为了达到更高时间和空间效率，我们应当注意几点：</p>
+<p>HttpClient是通过Java NIO、Flow模式进行并发请求以及任务调度，同样可以做到其他语言中协程并发请求的效果。但是为了达到更高时间和空间效率，我们应当注意几点：</p>
 <ol>
 <li>不要重复创建多余的HttpClient实例</li>
 <li>自定义线程池，否则默认提供的线程池会创建大量线程，且线程利用率很低。</li>

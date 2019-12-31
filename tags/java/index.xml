@@ -18,7 +18,7 @@
       <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://qaqadrian.github.io/posts/httpclient/</guid>
-      <description>&lt;p&gt;JDK11提供的HttpClient是一个很好的异步Http请求工具。有了它，我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求，但是如何才能更好的、正确的利用线程资源呢？（本篇皆以OpenJDK11为基础。）&lt;/p&gt;</description>
+      <description>&lt;p&gt;JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）&lt;/p&gt;</description>
     </item>
     
   </channel>
