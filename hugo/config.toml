@@ -1,43 +1,48 @@
+baseURL = "https://www.blablaworker.com/static/blog"
+title = "一个非常愁起名字的人"
+theme = "m10c"
+paginate = 5
+# publishdir = "../"
+buildDrafts = false
 
-baseurl = "https://qaqadrian.github.io"
-languageCode = "zh"
-title = "一个为起名字很愁恼的人的博客"
-theme = "kiss"
-copyright = "&copy; <a href=\"https://github.com/QaQAdrian\">QaQAdrian</a> 2019"
-# disqusShortname = "shortname"
-# googleAnalytics = ""
-Paginate = 5 # Number of posts per page
-enableRobotsTXT = true
-publishDir = ".."
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
 
+[params]
+  author = "Adrian"
+  description = "如果需要联系，可以发送至邮箱yahaha7777@gmail.com"
+  menu_item_separator = " - "
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/qaqadrian"
 
-[params.assets]
-customCSS = ["css/custom.css"]
+  # Brown theme
+  #[params.style]
+  #  darkestColor = "#463625"
+  #  darkColor = "#2a3738"
+  #  primaryColor = "#eeee6a"
+  #  lightColor = "#96a879"
+  #  lightestColor = "#ffffff"
 
-[params.info]
-adsense = "" # Adsense ID (ID only, without ca-pub-)
-enableSocial = true # Adds OpenGraph and Twitter cards
-homeTitle = "一个为起名字很愁恼的人的博客" # Title for home page
-poweredby = true # Adds powered by hugo and kiss below Copyright
-related = true # Includes related articles at the bottom of the article
-codeCopy = true # Add copy button above code blocks
+  # Green theme
+  [params.style]
+  #  darkestColor = "#315659"
+  #  darkColor = "#253031"
+  #  primaryColor = "#dad865"
+  #  lightColor = "#96a879"
+   lightestColor = "#e0e0e0"
 
-# [params.features]
-# disqusOnDemand = true  # Load Disqus comments on click
-
-[params.social]
-github = "QaQAdrian"
-email = "yahaha7777@gmail.com"
-
-[params.social.config]
-platforms = ["github","email"]
-
-# [params.matomoAnalytics]
-# siteID = 1
-# rootURL = "//matomo.example.com/"
-
-[taxonomies]
-tag ="tags"
-
-# [blackfriday]
-# hrefTargetBlank = true
+  # Red and black theme
+  #[params.style]
+  #  darkestColor = "#d35050"
+  #  darkColor = "#212121"
+  #  primaryColor = "#ffffff"
+  #  lightColor = "#a2a2a2"
+  #  lightestColor = "#d3d3d3"

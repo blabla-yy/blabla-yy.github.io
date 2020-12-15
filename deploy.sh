@@ -5,7 +5,7 @@ set -e
 
 printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 
-cd hugo 
+cd hugo -d ..
 hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
 cd ..
 
