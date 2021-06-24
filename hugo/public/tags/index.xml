@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 一个非常愁起名字的人</title>
+    <link>https://www.blablaworker.com/static/blog/tags/</link>
+    <description>Recent content in Tags on 一个非常愁起名字的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.blablaworker.com/static/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Async</title>
+      <link>https://www.blablaworker.com/static/blog/tags/async/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.blablaworker.com/static/blog/tags/async/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://www.blablaworker.com/static/blog/tags/java/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.blablaworker.com/static/blog/tags/java/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
