@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 一个非常愁起名字的人</title>
-    <link>https://www.blablaworker.com/static/blog/categories/</link>
+    <link>https://qaqAdrian.github.io/categories/</link>
     <description>Recent content in Categories on 一个非常愁起名字的人</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://www.blablaworker.com/static/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://qaqAdrian.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java</title>
-      <link>https://www.blablaworker.com/static/blog/categories/java/</link>
+      <link>https://qaqAdrian.github.io/categories/java/</link>
       <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://www.blablaworker.com/static/blog/categories/java/</guid>
+      <guid>https://qaqAdrian.github.io/categories/java/</guid>
       <description></description>
     </item>
     
