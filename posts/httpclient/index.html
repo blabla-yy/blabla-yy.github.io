@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Java中的异步Http请求：HttpClient分析与使用优化事项 // 一个非常愁起名字的人</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.84.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Adrian" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://qaqAdrian.github.io/css/main.min.91b4ea7db80ffce7870e25110df47b641b4effd3dda6ca71e51ac3fd2713f3b8.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java中的异步Http请求：HttpClient分析与使用优化事项"/>
+<meta name="twitter:description" content="JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）"/>
+
+    <meta property="og:title" content="Java中的异步Http请求：HttpClient分析与使用优化事项" />
+<meta property="og:description" content="JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qaqAdrian.github.io/posts/httpclient/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-12-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2019-12-30T00:00:00&#43;00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://qaqAdrian.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Adrian" /></a>
+      <h1>一个非常愁起名字的人</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>如果需要联系，可以发送至邮箱yahaha7777@gmail.com</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/qaqadrian" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Java中的异步Http请求：HttpClient分析与使用优化事项</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 30, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/java/">Java</a>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/async/">Async</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>JDK11提供的HttpClient是一个很好的异步Http请求工具。我们可以像其他拥有协程语言一样，以少量线程，完成更多并发请求。但是如果使用默认配置并不能达到最优效果。（本篇皆以OpenJDK11为基础。）</p>
+<h2 id="一简单使用">一、简单使用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var client <span style="color:#f92672">=</span> HttpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">newHttpClient</span><span style="color:#f92672">();</span>
+var request <span style="color:#f92672">=</span> HttpRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">newBuilder</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">uri</span><span style="color:#f92672">(</span>URI<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://...&#34;</span><span style="color:#f92672">))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">GET</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+client<span style="color:#f92672">.</span><span style="color:#a6e22e">sendAsync</span><span style="color:#f92672">(</span>request<span style="color:#f92672">,</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">BodyHandlers</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ofString</span><span style="color:#f92672">())</span>
+  <span style="color:#f92672">.</span><span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">::</span>println<span style="color:#f92672">)</span>
+</code></pre></div><h2 id="二异步相关的核心类">二、异步相关的核心类</h2>
+<h3 id="1httpclientimpl">1、HttpClientImpl</h3>
+<p>HttpClient实现类</p>
+<ul>
+<li>HttpClient默认构造的线程池是通过Executors.newCachedThreadPool构造的，其线程数最大值为Integer.MAX_VALUE，核心线程数为0。这意味着如果我们 <strong>短时间内发送大量请求时，会创建过多的线程</strong> ，影响性能。我们应当根据情况适当优化线程池配置。线程池构造源码如下：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Executor ex <span style="color:#f92672">=</span> builder<span style="color:#f92672">.</span><span style="color:#a6e22e">executor</span><span style="color:#f92672">;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ex <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    ex <span style="color:#f92672">=</span> Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newCachedThreadPool</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DefaultThreadFactory<span style="color:#f92672">(</span>id<span style="color:#f92672">));</span>
+    isDefaultExecutor <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+    isDefaultExecutor <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>通过上述源码，我们也可以发现，如果我们 <strong>多次构造HttpClient实例</strong> 时不指定Executor实例，<strong>会重复创建多个线程池实例</strong>。（核心线程数为0）</li>
+</ul>
+<h3 id="2selectormanager">2、SelectorManager</h3>
+<p>SelectorMangager顾名思义，管理Selector操作，用于事件监听，是HttpClient的Socket管理核心类。</p>
+<ul>
+<li>继承Thread，且是一个守护线程</li>
+<li>当HttpClient实例创建完成后，SelectorManager实例便start运行</li>
+<li>每当HttpClientImpl创建时，便会启动SelectorManager线程，<strong>多HttpClient实例多SelectorManager线程</strong></li>
+</ul>
+<h3 id="3sockettube">3、SocketTube</h3>
+<p>实现Java9 Flow API中Publisher和Subscriber接口，为HttpClient提供响应式、异步处理Socket事件操作。</p>
+<h2 id="三httpclient线程测试分析">三、HttpClient线程测试分析</h2>
+<h3 id="测试方式">测试方式</h3>
+<ul>
+<li>HttpClient提供了debug模式，我们可以通过设置参数开启。debug会展示线程名称，线程ID（自增），以及消耗时间。由自增ID我们可以推断大致产生多少线程。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">System<span style="color:#f92672">.</span><span style="color:#a6e22e">setProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;jdk.internal.httpclient.debug&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div></li>
+<li>由于线程数目差距比较明显，没有使用jvm调试工具，而是运行结束前通过Thread.currentThread().getThreadGroup()获取线程组信息。（并不是运行期间产生的总线程数）</li>
+<li>服务端提供简单Http接口，<strong>接口需要1秒钟后再写Response</strong> 。（Thread.sleep）</li>
+<li>客户端分三种方式，每种方式都是并发100次请求。
+<ul>
+<li>每次请求均创建一个HttpClient实例。</li>
+<li>共用一个HttpClient，HttpClient使用默认构造方式。</li>
+<li>共用一个HttpClient，且共用一个自定义线程池，优化线程池配置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="测试代码">测试代码</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestHttpClient</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> times<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> HttpClient client<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Supplier<span style="color:#f92672">&lt;</span>HttpClient<span style="color:#f92672">&gt;</span> clientSupplier<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TestHttpClient</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> times<span style="color:#f92672">,</span> Supplier<span style="color:#f92672">&lt;</span>HttpClient<span style="color:#f92672">&gt;</span> client<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">times</span> <span style="color:#f92672">=</span> times<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">clientSupplier</span> <span style="color:#f92672">=</span> client<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TestHttpClient</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> times<span style="color:#f92672">,</span> Optional<span style="color:#f92672">&lt;</span>Executor<span style="color:#f92672">&gt;</span> executor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">times</span> <span style="color:#f92672">=</span> times<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> executor<span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>ex <span style="color:#f92672">-&gt;</span> HttpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">newBuilder</span><span style="color:#f92672">().</span><span style="color:#a6e22e">executor</span><span style="color:#f92672">(</span>ex<span style="color:#f92672">).</span><span style="color:#a6e22e">build</span><span style="color:#f92672">())</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">orElse</span><span style="color:#f92672">(</span>HttpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">newHttpClient</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>times <span style="color:#f92672">&lt;=</span> 0 <span style="color:#f92672">||</span> <span style="color:#f92672">(</span>clientSupplier <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> client <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>client <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">startWithClient</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">startWithSupplier</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startWithSupplier</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        var list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>CompletableFuture<span style="color:#f92672">&lt;</span>HttpResponse<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;&gt;();</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>var i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> times<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">clientSupplier</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(),</span> URL<span style="color:#f92672">));</span>
+        <span style="color:#f92672">}</span>
+        CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">allOf</span><span style="color:#f92672">(</span>list<span style="color:#f92672">.</span><span style="color:#a6e22e">toArray</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> CompletableFuture<span style="color:#f92672">[</span>0<span style="color:#f92672">]))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> showAllThread<span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">())).</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startWithClient</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        var list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>CompletableFuture<span style="color:#f92672">&lt;</span>HttpResponse<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;&gt;();</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>var i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> times<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">client</span><span style="color:#f92672">,</span> URL<span style="color:#f92672">));</span>
+        <span style="color:#f92672">}</span>
+        CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">allOf</span><span style="color:#f92672">(</span>list<span style="color:#f92672">.</span><span style="color:#a6e22e">toArray</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> CompletableFuture<span style="color:#f92672">[</span>0<span style="color:#f92672">]))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> showAllThread<span style="color:#f92672">(</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">())).</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> CompletableFuture<span style="color:#f92672">&lt;</span>HttpResponse<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>HttpClient client<span style="color:#f92672">,</span> String urlString<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        var req <span style="color:#f92672">=</span> HttpRequest<span style="color:#f92672">.</span><span style="color:#a6e22e">newBuilder</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">uri</span><span style="color:#f92672">(</span>URI<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>urlString<span style="color:#f92672">))</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">GET</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> client<span style="color:#f92672">.</span><span style="color:#a6e22e">sendAsync</span><span style="color:#f92672">(</span>req<span style="color:#f92672">,</span> HttpResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">BodyHandlers</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ofString</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showAllThread</span><span style="color:#f92672">(</span>Thread thread<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Current Thread: &#34;</span> <span style="color:#f92672">+</span> thread<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; active count:&#34;</span> <span style="color:#f92672">+</span> thread<span style="color:#f92672">.</span><span style="color:#a6e22e">getThreadGroup</span><span style="color:#f92672">().</span><span style="color:#a6e22e">activeCount</span><span style="color:#f92672">());</span>
+        ThreadGroup currentGroup <span style="color:#f92672">=</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getThreadGroup</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">int</span> noThreads <span style="color:#f92672">=</span> currentGroup<span style="color:#f92672">.</span><span style="color:#a6e22e">activeCount</span><span style="color:#f92672">();</span>
+        Thread<span style="color:#f92672">[]</span> lstThreads <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">[</span>noThreads<span style="color:#f92672">];</span>
+        currentGroup<span style="color:#f92672">.</span><span style="color:#a6e22e">enumerate</span><span style="color:#f92672">(</span>lstThreads<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> noThreads<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;i：&#34;</span> <span style="color:#f92672">+</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; = &#34;</span> <span style="color:#f92672">+</span> lstThreads<span style="color:#f92672">[</span>i<span style="color:#f92672">].</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="测试分析">测试分析</h3>
+<h4 id="测试1每个请求都创建一个httpclient">测试1：每个请求都创建一个HttpClient</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var times <span style="color:#f92672">=</span> 100<span style="color:#f92672">;</span>
+var defaultClient <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestHttpClient<span style="color:#f92672">(</span>times<span style="color:#f92672">,</span> HttpClient<span style="color:#f92672">::</span>newHttpClient<span style="color:#f92672">);</span>
+defaultClient<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+DEBUG: [HttpClient-100-SelectorManager] [2s 471ms] Http1AsyncReceiver(SocketTube(100)) Http1TubeSubscriber: dropSubscription
+...
+DEBUG: [HttpClient-100-Worker-2] [2s 500ms] Http1AsyncReceiver(SocketTube(100)) Got 0 bytes for delegate null
+...
+DEBUG: [HttpClient-81-SelectorManager] [2s 562ms] SocketTube(81) write: starting subscription
+DEBUG: [HttpClient-76-Worker-1] [2s 562ms] SocketTube(76) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-81-SelectorManager] [2s 562ms] SocketTube(81) write: offloading requestMore
+DEBUG: [HttpClient-9-SelectorManager] [2s 562ms] SocketTube(20) Read scheduler stopped
+DEBUG: [HttpClient-9-SelectorManager] [2s 562ms] Http2ClientImpl stopping
+DEBUG: [HttpClient-81-Worker-0] [2s 562ms] SocketTube(81) write: requesting more...
+DEBUG: [HttpClient-81-Worker-0] [2s 562ms] SocketTube(81) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+
+Current Thread: ForkJoinPool.commonPool-worker-7 active count:329
+...
+</code></pre></div><p>分析：由debug日志提供的线程ID数目，可以看出会创建 <strong>100个SelectorManager线程</strong> ，线程池内线程数也十分多，结束前线程组仍包含了 <strong>329个线程</strong> ，最终使用 <strong>2s 562ms</strong>。</p>
+<h4 id="测试2100次请求共用一个httpclienthttpclient使用默认构造方式">测试2：100次请求共用一个HttpClient，HttpClient使用默认构造方式。</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var defaultClient <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestHttpClient<span style="color:#f92672">(</span>times<span style="color:#f92672">,</span> Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">empty</span><span style="color:#f92672">());</span>
+defaultClient<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+DEBUG: [HttpClient-1-SelectorManager] [2s 75ms] SocketTube(23) write: offloading requestMore
+DEBUG: [HttpClient-1-Worker-18] [2s 75ms] SocketTube(23) write: requesting more...
+DEBUG: [HttpClient-1-Worker-18] [2s 75ms] SocketTube(23) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [HttpClient-1-Worker-66] [2s 75ms] SocketTube(50) write: requesting more...
+DEBUG: [HttpClient-1-Worker-66] [2s 76ms] SocketTube(50) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+...
+Current Thread: ForkJoinPool.commonPool-worker-11 active count:98
+...
+</code></pre></div><p>仅拥有一个SelectorManager线程，但可以看出线程ID已经自增到了 <strong>80+</strong> ，结束前线程仍有 <strong>98个</strong> ，时间消耗了 <strong>2s 76ms</strong></p>
+<h4 id="测试3优化线程池配置">测试3：优化线程池配置</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">var executor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadPoolExecutor<span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span>
+        1<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">,</span>
+        <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;&gt;());</span>
+var customExecutorClient <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestHttpClient<span style="color:#f92672">(</span>times<span style="color:#f92672">,</span> Optional<span style="color:#f92672">.</span><span style="color:#a6e22e">of</span><span style="color:#f92672">(</span>executor<span style="color:#f92672">);</span>
+customExecutorClient<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</code></pre></div><p>这个线程池核心数为0，最大线程池为1，保证程序能够在所有线程工作完成后1s自动退出，且减少创建销毁线程的开销。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+DEBUG: [pool-1-thread-1] [2s 9ms] SocketTube(99) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [pool-1-thread-1] [2s 9ms] SocketTube(100) write: requesting more...
+DEBUG: [pool-1-thread-1] [2s 9ms] SocketTube(100) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+DEBUG: [pool-1-thread-1] [2s 9ms] SocketTube(98) write: requesting more...
+DEBUG: [pool-1-thread-1] [2s 9ms] SocketTube(98) leaving requestMore:  Reading: [ops=1, demand=1, stopped=false], Writing: [ops=0, demand=1]
+Current Thread: ForkJoinPool.commonPool-worker-3 active count:5
+i：0 = main
+i：1 = Monitor Ctrl-Break
+i：2 = HttpClient-1-SelectorManager
+i：3 = pool-1-thread-1
+i：4 = ForkJoinPool.commonPool-worker-3
+</code></pre></div><p>结束前 <strong>线程数仅为5，耗时仅为2s9ms</strong> 便完成了100个请求。 （这5个线程并不是在期间总产生数量，而是运行结束前的数量）
+这5个线程中包含主线程(Main)，信号检测线程(Monitor Ctrl-Break)，SelectorManager，我们定义的线程池，还有ForkJoinPool的线程（CompletableFuture默认使用，可以看出ID已经增长到了3）。其他使用情况均创建大量线程，且并没有提高并发能力。</p>
+<h2 id="四总结">四、总结</h2>
+<p>HttpClient是通过Java NIO、Flow模式进行并发请求以及任务调度，同样可以做到其他语言中协程并发请求的效果。但是为了达到更高时间和空间效率，我们应当注意几点：</p>
+<ol>
+<li>不要重复创建多余的HttpClient实例</li>
+<li>自定义线程池，否则默认提供的线程池会创建大量线程，且线程利用率很低。</li>
+</ol>
+<p>由于线程数目差距比较明显，没有使用jvm调试工具，有兴趣的小伙伴可以使用工具，查看具体产生了多少线程。</p>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
