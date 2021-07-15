@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>我的第二个SwiftUI项目——xZip 上线中遇到的问题(一) // 一个非常愁起名字的人</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Adrian" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://qaqAdrian.github.io/css/main.min.91b4ea7db80ffce7870e25110df47b641b4effd3dda6ca71e51ac3fd2713f3b8.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)"/>
+<meta name="twitter:description" content="一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
+ iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
+这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）
+二、SwiftUI中遇到的问题 1. macOS a. 沙盒模式文件权限（小白） 问题：App Store需要开启沙盒模式，文件权限如何获取
+解决方法：
+ 解压软件一般是用户主动选择需要解压的文件和解压到的地址，即&quot;App Sandbox&quot;中开启 User Selected File: Read/Write 选择文件/地址  SwiftUI中没有相关组件，需要用AppKit，NSOpenPanel   拖入文件  SwiftUI的 onDrop 函数    b. SwiftUI无法灵活改变Window大小 需求：进入某一个视图的时候希望窗口大小大一些。
+问题：SwiftUI可以通过frame(width:heigth:)以及frame(minWidth:idealWidth:&hellip;)定义window大小。但是无法通过onAppear等函数动态调整当前窗口大小。
+解决方法：
+ onAppear通过NSApplication.shared.windows获取window对象，进而改变大小  static func getFirstWindowFrame() -&gt; CGRect? { let size: CGRect? = NSApplication.shared.windows.first?.frame //多窗口需要修改哦 return size } static func changeFirstWindowFrame(size: CGRect) { if let window = NSApplication."/>
+
+    <meta property="og:title" content="我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)" />
+<meta property="og:description" content="一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
+ iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
+这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）
+二、SwiftUI中遇到的问题 1. macOS a. 沙盒模式文件权限（小白） 问题：App Store需要开启沙盒模式，文件权限如何获取
+解决方法：
+ 解压软件一般是用户主动选择需要解压的文件和解压到的地址，即&quot;App Sandbox&quot;中开启 User Selected File: Read/Write 选择文件/地址  SwiftUI中没有相关组件，需要用AppKit，NSOpenPanel   拖入文件  SwiftUI的 onDrop 函数    b. SwiftUI无法灵活改变Window大小 需求：进入某一个视图的时候希望窗口大小大一些。
+问题：SwiftUI可以通过frame(width:heigth:)以及frame(minWidth:idealWidth:&hellip;)定义window大小。但是无法通过onAppear等函数动态调整当前窗口大小。
+解决方法：
+ onAppear通过NSApplication.shared.windows获取window对象，进而改变大小  static func getFirstWindowFrame() -&gt; CGRect? { let size: CGRect? = NSApplication.shared.windows.first?.frame //多窗口需要修改哦 return size } static func changeFirstWindowFrame(size: CGRect) { if let window = NSApplication." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qaqAdrian.github.io/posts/swiftui/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-15T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://qaqAdrian.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Adrian" /></a>
+      <h1>一个非常愁起名字的人</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>如果需要联系，可以发送至邮箱yahaha7777@gmail.com</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/qaqadrian" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 15, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/swiftui/">SwiftUI</a>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/swift/">Swift</a>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/ios/">iOS</a>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/macos/">macOS</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h2 id="一背景">一、背景</h2>
+<p>最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。<br>
+个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。</p>
+<ul>
+<li>iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。</li>
+<li>iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。</li>
+<li>DocumentBased-App许多功能无法定制，如：隐藏创建按钮。</li>
+<li>iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。</li>
+</ul>
+<p>第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。<br>
+这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）</p>
+<h2 id="二swiftui中遇到的问题">二、SwiftUI中遇到的问题</h2>
+<h3 id="1-macos">1. macOS</h3>
+<h4 id="a-沙盒模式文件权限小白">a. 沙盒模式文件权限（小白）</h4>
+<p>问题：App Store需要开启沙盒模式，文件权限如何获取<br>
+解决方法：</p>
+<ul>
+<li>解压软件一般是用户主动选择需要解压的文件和解压到的地址，即&quot;App Sandbox&quot;中开启 <strong>User Selected File: Read/Write</strong></li>
+<li>选择文件/地址
+<ul>
+<li>SwiftUI中没有相关组件，需要用AppKit，<strong>NSOpenPanel</strong></li>
+</ul>
+</li>
+<li>拖入文件
+<ul>
+<li>SwiftUI的 <strong>onDrop</strong> 函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="b-swiftui无法灵活改变window大小">b. SwiftUI无法灵活改变Window大小</h4>
+<p>需求：进入某一个视图的时候希望窗口大小大一些。<br>
+问题：SwiftUI可以通过frame(width:heigth:)以及frame(minWidth:idealWidth:&hellip;)定义window大小。但是无法通过onAppear等函数动态调整当前窗口大小。<br>
+解决方法：</p>
+<ul>
+<li>onAppear通过NSApplication.shared.windows获取window对象，进而改变大小</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getFirstWindowFrame</span>() -&gt; CGRect? {
+    <span style="color:#66d9ef">let</span> size: CGRect? = NSApplication.shared.windows.first?.frame <span style="color:#75715e">//多窗口需要修改哦</span>
+    <span style="color:#66d9ef">return</span> size
+}
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">changeFirstWindowFrame</span>(size: CGRect) {
+    <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> window = NSApplication.shared.windows.first {
+        window.setFrame(size, display: <span style="color:#66d9ef">true</span>, animate: <span style="color:#66d9ef">true</span>)
+    } <span style="color:#75715e">//多窗口需要修改哦</span>
+}
+</code></pre></div><h4 id="c-swiftui-toolbar无法创建icon在上text在下的label">c. SwiftUI Toolbar无法创建icon在上，Text在下的Label</h4>
+<p>需求：
+<img src="/images/toolbar1.jpg" alt="toolbar"><br>
+问题：SwiftUI并不能定制NavigationBar/Toolbar高度。
+解决方法：很多macOS内置应用是纯icon或者左右排列icon和文本的Toolbar。所以SwiftUI短时间也不会支持吧。暂时没有很好的解决办法。</p>
+<ul>
+<li>左右排列icon、文本</li>
+<li>纯icon + Tooltip</li>
+</ul>
+<h4 id="d-swiftui-toolbar无法定制背景颜色">d. SwiftUI Toolbar无法定制背景颜色</h4>
+<p>解决办法：SwiftUI并没有提供相关API。</p>
+<h4 id="e-swiftui-toolbar-icon太小了">e. SwiftUI Toolbar icon太小了</h4>
+<p>解决办法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">Image(systemName: imageName)
+    .resizable()
+    .scaledToFit()
+    .imageScale(.large)
+</code></pre></div><h4 id="f-多级嵌套listchildren中显示高度错误问题ios记得没有这个问题">f. 多级嵌套List(children:)中显示高度错误问题。（iOS记得没有这个问题）</h4>
+<p>解决办法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">list.listStyle(SidebarListStyle()) <span style="color:#75715e">// 目前DefaultListStyle等中会出现错位问题。但是SidebarListStyle没问题</span>
+</code></pre></div><h4 id="g-无法代码控制侧边栏的开关">g. 无法代码控制侧边栏的开关</h4>
+<p>解决办法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">NSApp.keyWindow?.firstResponder?.tryToPerform(<span style="color:#66d9ef">#selector</span>(NSSplitViewController.toggleSidebar(<span style="color:#66d9ef">_</span>:)), with: <span style="color:#66d9ef">nil</span>) <span style="color:#75715e">// 多窗口的需要注意哦</span>
+</code></pre></div><p>也可以在创建WindowGroup时加一下快捷键</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">windowGroup.commands {
+    SidebarCommands()
+}
+</code></pre></div><h4 id="h-标题栏不好控制">h. 标题栏不好控制。</h4>
+<p>解决办法：直接去掉吧。太难用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">windowGroup.windowToolbarStyle(UnifiedCompactWindowToolbarStyle(showsTitle: <span style="color:#66d9ef">false</span>)) <span style="color:#75715e">// 根据情况选择toolbarStyle</span>
+                .windowStyle(HiddenTitleBarWindowStyle())
+</code></pre></div><h4 id="i-toolbar样式关掉侧边栏时不隐藏masterview的toolbar">i. Toolbar样式，关掉侧边栏时不隐藏masterView的Toolbar</h4>
+<p>解决办法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift">windowGroup.windowToolbarStyle(UnifiedCompactWindowToolbarStyle()
+</code></pre></div><h4 id="结果">结果</h4>
+<p><img src="/images/xZip-preview.jpg" alt="xZip-preview"></p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
