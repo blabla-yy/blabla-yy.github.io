@@ -24,7 +24,8 @@ if (!doNotTrack) {
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)"/>
-<meta name="twitter:description" content="一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+<meta name="twitter:description" content="xZip macOS AppStore 链接：https://apps.apple.com/cn/app/xzip/id1573682863?mt=12
+ 一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
 个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
  iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
 这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）
@@ -36,7 +37,8 @@ if (!doNotTrack) {
  onAppear通过NSApplication.shared.windows获取window对象，进而改变大小  static func getFirstWindowFrame() -&gt; CGRect? { let size: CGRect? = NSApplication.shared.windows.first?.frame //多窗口需要修改哦 return size } static func changeFirstWindowFrame(size: CGRect) { if let window = NSApplication."/>
 
     <meta property="og:title" content="我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)" />
-<meta property="og:description" content="一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+<meta property="og:description" content="xZip macOS AppStore 链接：https://apps.apple.com/cn/app/xzip/id1573682863?mt=12
+ 一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
 个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
  iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
 这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）
@@ -107,7 +109,10 @@ if (!doNotTrack) {
       </div>
     </header>
     <div class="post-content">
-      <h2 id="一背景">一、背景</h2>
+      <blockquote>
+<p>xZip macOS AppStore 链接：https://apps.apple.com/cn/app/xzip/id1573682863?mt=12</p>
+</blockquote>
+<h2 id="一背景">一、背景</h2>
 <p>最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。<br>
 个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。</p>
 <ul>
@@ -155,7 +160,7 @@ if (!doNotTrack) {
 </code></pre></div><h4 id="c-swiftui-toolbar无法创建icon在上text在下的label">c. SwiftUI Toolbar无法创建icon在上，Text在下的Label</h4>
 <p>需求：
 <img src="/images/toolbar1.jpg" alt="toolbar"><br>
-问题：SwiftUI并不能定制NavigationBar/Toolbar高度。
+问题：SwiftUI并不能定制NavigationBar/Toolbar高度。<br>
 解决方法：很多macOS内置应用是纯icon或者左右排列icon和文本的Toolbar。所以SwiftUI短时间也不会支持吧。暂时没有很好的解决办法。</p>
 <ul>
 <li>左右排列icon、文本</li>

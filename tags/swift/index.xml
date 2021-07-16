@@ -12,7 +12,8 @@
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://qaqAdrian.github.io/posts/swiftui-xzip/</guid>
-      <description>一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+      <description>xZip macOS AppStore 链接：https://apps.apple.com/cn/app/xzip/id1573682863?mt=12
+ 一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
 个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
  iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
 这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）

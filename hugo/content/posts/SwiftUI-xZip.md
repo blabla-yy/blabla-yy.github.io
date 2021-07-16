@@ -15,6 +15,7 @@ categories:
 title: 我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)
 draft: false
 ---
+> xZip macOS AppStore 链接：https://apps.apple.com/cn/app/xzip/id1573682863?mt=12
 ## 一、背景
 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。  
 个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
@@ -57,7 +58,7 @@ static func changeFirstWindowFrame(size: CGRect) {
 #### c. SwiftUI Toolbar无法创建icon在上，Text在下的Label
 需求：
 ![toolbar](/images/toolbar1.jpg)  
-问题：SwiftUI并不能定制NavigationBar/Toolbar高度。
+问题：SwiftUI并不能定制NavigationBar/Toolbar高度。  
 解决方法：很多macOS内置应用是纯icon或者左右排列icon和文本的Toolbar。所以SwiftUI短时间也不会支持吧。暂时没有很好的解决办法。
 - 左右排列icon、文本
 - 纯icon + Tooltip
