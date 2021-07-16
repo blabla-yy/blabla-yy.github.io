@@ -5,7 +5,7 @@ paginate = 5
 # publishdir = "../"
 buildDrafts = false
 googleAnalytics = "G-9QL623VTYK"
-disqusShortname = "qaqadrian"
+# disqusShortname = "qaqadrian"
 [menu]
   [[menu.main]]
     identifier = "home"
