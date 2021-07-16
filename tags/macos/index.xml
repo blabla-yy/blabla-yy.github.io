@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macOS on 一个非常愁起名字的人</title>
+    <link>https://qaqAdrian.github.io/tags/macos/</link>
+    <description>Recent content in macOS on 一个非常愁起名字的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qaqAdrian.github.io/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)</title>
+      <link>https://qaqAdrian.github.io/posts/swiftui-xzip/</link>
+      <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://qaqAdrian.github.io/posts/swiftui-xzip/</guid>
+      <description>一、背景 最近几年有兴趣做独立开发，偶尔会写一些简单的App上架到App Store，恰巧19年时Apple发布了SwiftUI框架，便开始以新框架为主进行开发了。
+个人使用时遇到了一些问题，其中不得不说SwiftUI尚未成熟。
+ iOS13的初期几个小版本，SwiftUI项目运行时都有明显问题，List、Button、NaviationLink等许多地方和预期不一致。 iOS14中List虽补充了很多功能，但是同样缺少很多API。如：List无法消除分割线、箭头符号，无法定制左滑删除时的Delect文案等等。 DocumentBased-App许多功能无法定制，如：隐藏创建按钮。 iOS13和iOS14中List的样式差距很大，如果用了一些workaround方法，会导致失效或者变得巨丑无比。  第一次用SwiftUI是一个推荐文章、项目的App，主要想试一试，当然做出来的成品也上架了，但是emmmm自己并不懂得运营随后便下架了。
+这次就做一个简单的解压缩软件。目前已经上架（纯免费啦），来记录一下开发到上架过程中遇到的问题。（其中包含一些iOS/macOS小白问题）
+二、SwiftUI中遇到的问题 1. macOS a. 沙盒模式文件权限（小白） 问题：App Store需要开启沙盒模式，文件权限如何获取
+解决方法：
+ 解压软件一般是用户主动选择需要解压的文件和解压到的地址，即&amp;quot;App Sandbox&amp;quot;中开启 User Selected File: Read/Write 选择文件/地址  SwiftUI中没有相关组件，需要用AppKit，NSOpenPanel   拖入文件  SwiftUI的 onDrop 函数    b. SwiftUI无法灵活改变Window大小 需求：进入某一个视图的时候希望窗口大小大一些。
+问题：SwiftUI可以通过frame(width:heigth:)以及frame(minWidth:idealWidth:&amp;hellip;)定义window大小。但是无法通过onAppear等函数动态调整当前窗口大小。
+解决方法：
+ onAppear通过NSApplication.shared.windows获取window对象，进而改变大小  static func getFirstWindowFrame() -&amp;gt; CGRect? { let size: CGRect? = NSApplication.shared.windows.first?.frame //多窗口需要修改哦 return size } static func changeFirstWindowFrame(size: CGRect) { if let window = NSApplication.</description>
+    </item>
+    
+  </channel>
+</rss>
