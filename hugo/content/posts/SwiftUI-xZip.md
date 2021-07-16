@@ -11,7 +11,7 @@ tags:
   - iOS
   - macOS
 categories:
-  - Java
+  - Swift
 title: 我的第二个SwiftUI项目——xZip 上线中遇到的问题(一)
 draft: false
 ---

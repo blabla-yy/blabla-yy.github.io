@@ -4,6 +4,7 @@ theme = "m10c"
 paginate = 5
 # publishdir = "../"
 buildDrafts = false
+googleAnalytics = "G-9QL623VTYK"
 
 [menu]
   [[menu.main]]
