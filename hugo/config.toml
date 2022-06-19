@@ -23,6 +23,7 @@ googleAnalytics = "G-9QL623VTYK"
   [[params.social]]
     name = "github"
     url = "https://github.com/qaqadrian"
+    icon = "avatar.jpg"
 
   # Brown theme
   #[params.style]

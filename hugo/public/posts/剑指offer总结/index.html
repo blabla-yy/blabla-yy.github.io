@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>《剑指Offer》读后总结 // 一个非常愁起名字的人</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.101.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Adrian" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://qaqAdrian.github.io/css/main.min.7a4f1be57a1c2f8d96f1989fdd1829eb3cc72754902fbe5d63a0926524f22344.css" />
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9QL623VTYK"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9QL623VTYK', { 'anonymize_ip': false });
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《剑指Offer》读后总结"/>
+<meta name="twitter:description" content="《剑指Offer》不知道这本书是怎样在我的圈子里火起来的，但确实写的很不错，我从头到尾读了一遍，总结一下这本书提到的那些算法和思想，以及面试技巧。《剑指Offer》使用的语言是C&#43;&#43;，我主要是用Javascript或Java做算法题。"/>
+
+    <meta property="og:title" content="《剑指Offer》读后总结" />
+<meta property="og:description" content="《剑指Offer》不知道这本书是怎样在我的圈子里火起来的，但确实写的很不错，我从头到尾读了一遍，总结一下这本书提到的那些算法和思想，以及面试技巧。《剑指Offer》使用的语言是C&#43;&#43;，我主要是用Javascript或Java做算法题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://qaqAdrian.github.io/posts/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-04-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-06T00:00:00+00:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://qaqAdrian.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Adrian" /></a>
+      <h1>一个非常愁起名字的人</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <p>如果需要联系，可以发送至邮箱yahaha7777@gmail.com</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/qaqadrian" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">《剑指Offer》读后总结</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 6, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/algorithm/">Algorithm</a>
+              <a class="tag" href="https://qaqAdrian.github.io/tags/readingsummary/">ReadingSummary</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>《剑指Offer》不知道这本书是怎样在我的圈子里火起来的，但确实写的很不错，我从头到尾读了一遍，总结一下这本书提到的那些算法和思想，以及面试技巧。《剑指Offer》使用的语言是C++，我主要是用Javascript或Java做算法题。</p>
+<h1 id="剑指offer读后总结">《剑指Offer》读后总结</h1>
+<h2 id="一章节总结">一、章节总结</h2>
+<h3 id="第二章基础知识">第二章：基础知识</h3>
+<p>《剑指Offer》使用的语言是C++，所以在开篇部分的基础知识，主要以C++相关语法知识为主，包含C家族的几个语言。
+提到的考察内容：</p>
+<ul>
+<li>语言基础知识：sizeof （这个类似问题。。。我觉得见过N+1次了，C相关的面试基本都会考），虚函数，指针，单例模式</li>
+<li>数据结构：数组、链表、字符串（这个也算么）、树、栈和队列</li>
+<li>常见数据操作：递归与循环、查找和排序、回溯、动态规划与贪婪算法、位运算</li>
+</ul>
+<h2 id="二算法题总结">二、算法题总结</h2>
+<h3 id="1查找重复数据">1.查找重复数据</h3>
+<p>这种类型，第一想到的都是哈希表。在Java中是以数组+链表或红黑树实现哈希表并解决哈希冲突的，但是有几种情况是可以选择更优方案。</p>
+<ol>
+<li>当数据的类型是 <strong>整型或字符</strong> 时，我们可以根据题目分析，数组的索引是否可以作为哈希表的Key。</li>
+</ol>
+<ul>
+<li>
+<p>面试题3：数组中重复的数字（数组，哈希表）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>如果数字范围为0~n-1，数组可以修改的话,
+</span></span><span style="display:flex;"><span>以数组索引为Key，在原数组上交换位置可以达到时间复杂度O(n)就可以找到重复数字且不需要额外空间
+</span></span></code></pre></div><p>进阶问题：长度为n+1，数字都在1～n内，不修改原数组，如何查找重复数字</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>书中提供的方法是采用二分法。
+</span></span><span style="display:flex;"><span>先计算1~n/2这个范围的数字，在数组中出现的次数，如果次数不超过n/2，则再统计n/2~n，
+</span></span><span style="display:flex;"><span>以此循环查找。最终时间复杂度O(nlogn)，没有额外空间。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>我感觉直接使用排序再加上一趟查找也可以。。。
+</span></span></code></pre></div></li>
+<li>
+<p>面试题50：第一个只出现一次的字符（数组，哈希表）</p>
+<p>使用哈希表需要O(n)空间，但是使用长度为256的数组空间复杂度O(1)</p>
+</li>
+</ul>
+<h3 id="2需要理解循环过程辅助绘图">2.需要理解循环过程（辅助绘图）</h3>
+<ul>
+<li>
+<p>面试题4：二维数组中的查找（数组）</p>
+<p>先通过绘制矩阵图，然后分析即可</p>
+</li>
+<li>
+<p>面试题5：替换空格（数组）</p>
+<p>计算好替换后的长度，由尾至头进行拷贝和替换空格，可以避免由于一个字符长度变长导致后续所有字符都需要移位的问题</p>
+<p>合并数组问题也可以采用由后至前的方式。</p>
+</li>
+<li>
+<p>面试题6：从尾到头打印链表（链表、栈）</p>
+<p>使用栈作为辅助空间</p>
+</li>
+<li>
+<p>面试题7：重建二叉树（二叉树）</p>
+<p>题目中提供中序遍历和先序遍历的输出结果，根据先序遍历找到根节点，再在中序遍历中找到这个根节点，确认左右子树</p>
+</li>
+<li>
+<p>面试题8：二叉树的下一个节点（二叉树）</p>
+<p>画图分析所有情况</p>
+</li>
+<li>
+<p>面试题9：两个栈实现一个队列（栈、队列）</p>
+<p>画图分析，可以得知一个栈作为入队用，另一个栈作为出队用。当出队用的栈未空时，不需要入队用的栈导入数据。</p>
+<p>进阶问题：两个队列实现一个栈</p>
+<p>每次出栈时，都需要交换两个队列的数据。</p>
+</li>
+<li>
+<p>面试题10：斐波那契数列（动态规划）
+缓存前面几步的结果，时间复杂度O(n)，没有额外空间。（数学公式递归O(logn)）
+相似问题：青蛙跳台问题</p>
+</li>
+<li>
+<p>面试题11：旋转数组的最小数字（二分查找、数组）</p>
+<p>特殊情况：当头、尾、中间节点值相同时，只能采用顺序查找，如[1,0,1,1,1]</p>
+</li>
+<li>
+<p>面试题12：矩阵中的路径（数组、回溯法）</p>
+</li>
+<li>
+<p>面试题13：机器人的运动范围（数组、回溯法）</p>
+</li>
+<li>
+<p>面试题14：剪绳子（动态规划、贪婪算法）<br>
+注意缓存的2、3的值，和长度2、3的结果不一致。</p>
+</li>
+<li>
+<p>面试题15：二进制中1的个数（位运算）</p>
+<p>考虑符号位，采用无符号右移。特殊解法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n){
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> n;
+</span></span><span style="display:flex;"><span>    count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>面试题16：数值的整数次方（位运算，动态规划）<br>
+考虑多种情况：1、指数为负数 2、0和1 3、动态规划以节约时间</p>
+</li>
+<li>
+<p>面试题17：打印从1到最大的N位数（字符串）<br>
+使用字符串模拟数字，避免溢出问题</p>
+</li>
+<li>
+<p>面试题18：O(1)删除链表的节点（链表）<br>
+这个问题简直是个文字游戏，题目中已经提供的节点的实例，而不是value之类的值，所以我们可以直接将cur.v = cur.next.v，然后cur.next = cur.next.next这样删除节点。但是要注意的是，当前节点如果是尾节点或者头节点，需要做特殊处理。<br>
+相似问题：删除链表中的重复节点<br>
+特殊情况是如果重复的节点是连续出现的。</p>
+</li>
+<li>
+<p>面试题19：正则表达式匹配（我不想看这种题。）</p>
+</li>
+<li>
+<p>面试题20：表示数值的字符串（我也不想看这种题。）</p>
+</li>
+<li>
+<p>面试题21：调整数组顺序使奇数位于偶数前面（双指针）<br>
+这道题本身并没有要求排序，只要求奇数在偶数前面，所以双指针即可。但是作为秒杀Offer的解法，是把调整位置的判断函数提出来，作为lambda或者匿名函数之类的。</p>
+</li>
+<li>
+<p>面试题22：链表中倒数第K个节点（双指针）<br>
+一个指针先走K，另一个指针再走，步长都为1</p>
+</li>
+<li>
+<p>面试题23：链表中环的入口点（双指针）<br>
+需要一点点逻辑推断，或者是数学公式验证。<br>
+一种快慢指针，步长=2和步长=1，他们相遇（如果存在环）时，一个指针不动，另一个指针步长=1，这样可以计算环中节点数目为K。然后就比较简单了。两个节点回到头节点，一个先走K步，然后一起走，相遇的节点就是入口点。
+其他方式还不如这种简单易懂，可以参考leetcode上面。。。</p>
+</li>
+<li>
+<p>面试题24：反转链表（链表）<br>
+注意空链表，尾节点断开丢失，缓存反转后头节点指针。</p>
+</li>
+<li>
+<p>面试题25：合并两个排序的链表</p>
+</li>
+<li>
+<p>面试题26：树的子结构（二叉树遍历）</p>
+</li>
+<li>
+<p>面试题27：二叉树的镜像（二叉树遍历）</p>
+</li>
+<li>
+<p>面试题28：对称的二叉树（二叉树遍历）<br>
+遍历时考虑空指针，先序遍历和根-右-左（DRL）遍历</p>
+</li>
+<li>
+<p>面试题29：顺时针打印矩阵（数组）</p>
+</li>
+<li>
+<p>面试题30：包含min函数的栈<br>
+用额外一个栈空间，值为每一步操作对应的最小值<br>
+类似题目：包含max函数的队列（与min stack相比要麻烦一些）</p>
+</li>
+<li>
+<p>面试题31：栈的压入、弹出序列</p>
+</li>
+<li>
+<p>面试题32：从上到下打印二叉树（二叉树广度遍历）<br>
+类似题目：广度优先遍历有向图、分行打印二叉树、Z字形打印二叉树</p>
+</li>
+<li>
+<p>面试题33：二叉搜索树的后序遍历序列（二叉树后序遍历）</p>
+</li>
+<li>
+<p>面试题34：二叉树中和为某一值的路径（二叉树先序遍历）</p>
+</li>
+<li>
+<p>面试题35：复杂链表的复制（链表）<br>
+在原链表上进行拷贝节点，A-&gt;A&rsquo;-&gt;B-&gt;B'</p>
+</li>
+<li>
+<p>面试题36：二叉搜索树与双向链表（二叉树中序遍历）</p>
+</li>
+<li>
+<p>面试题37：序列化二叉树（二叉树先序遍历）</p>
+</li>
+<li>
+<p>面试题38：字符串的排列（递归）</p>
+</li>
+<li>
+<p>面试题39：数组中出现次数超过一半的数字（二分法）<br>
+排序：O(nlogn)；二分：O(n)；根据数组特点O(n)</p>
+</li>
+<li>
+<p>面试题40：最小的K个树（二分法、大顶堆）<br>
+二分：O(n)；大顶堆：O(nlogk)</p>
+</li>
+<li>
+<p>面试题41：数据流中的中位数（）<br>
+二分法，查找：O(n)，插入：O(1)；<br>
+排好序的数组：O(1)，O(n)<br>
+红黑树、大小顶堆：O(1)，O(logn)</p>
+</li>
+<li>
+<p>面试题42：连续子数组的最大和（动态规划、数组）<br>
+动态规划；数组规律</p>
+</li>
+<li>
+<p>面试题43：1～n中1出现的次数</p>
+</li>
+<li>
+<p>面试题44：数字序列中某一位的数字</p>
+</li>
+<li>
+<p>面试题45：把数组排成最小的数（数组排序）</p>
+</li>
+<li>
+<p>面试题46：把数字翻译成字符串</p>
+</li>
+<li>
+<p>面试题47：礼物的最大价值（动态规划）</p>
+</li>
+<li>
+<p>面试题48：最长不含重复字符的子字符串（动态规划）</p>
+</li>
+<li>
+<p>面试题49：丑数</p>
+</li>
+<li>
+<p>面试题50：第一次只出现一次的字符</p>
+</li>
+<li>
+<p>面试题51：数组中的逆序对</p>
+</li>
+<li>
+<p>面试题52：两个链表的第一个公共节点（链表，栈）</p>
+</li>
+<li>
+<p>面试题53：在排序数组中查找数字（二分、再二分、再再二分）<br>
+类似题目：0～n-1中缺失的数字；<br>
+类似题目：数组中数值和下标相等的元素；</p>
+</li>
+<li>
+<p>面试题54：二叉搜索树的第K大的节点（中序）</p>
+</li>
+<li>
+<p>面试题55：二叉树的深度（二叉树遍历）<br>
+类似题目：平衡二叉树（后序遍历）</p>
+</li>
+<li>
+<p>面试题56：数组中数字出现的次数（位运算+二分？）<br>
+类似题目：数组中唯一只出现一次的数字，其余出现3次</p>
+</li>
+<li>
+<p>面试题57：和为S的数字（双指针）<br>
+类似题目：何为S的连续正数序列</p>
+</li>
+<li>
+<p>面试题58：翻转字符串<br>
+类似题目：左旋转字符串</p>
+</li>
+<li>
+<p>面试题59：队列的最大值（滑动窗口）<br>
+类似题目：队列最大值</p>
+</li>
+<li>
+<p>面试题60：n个骰子的点数（递归/循环）</p>
+</li>
+<li>
+<p>面试题61：扑克牌中的顺子</p>
+</li>
+<li>
+<p>面试题62：圆圈中最后剩下的数字</p>
+</li>
+<li>
+<p>面试题63：股票最大利润（贪心？</p>
+</li>
+<li>
+<p>面试题64：1+2..+n</p>
+</li>
+<li>
+<p>面试题65：不用加减乘除做假发</p>
+</li>
+<li>
+<p>面试题66：构建乘积数组</p>
+</li>
+<li>
+<p>面试题67：字符串转数字</p>
+</li>
+<li>
+<p>面试题68：树中两个节点的最低公共祖先</p>
+</li>
+</ul>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

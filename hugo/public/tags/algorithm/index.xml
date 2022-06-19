@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on 一个非常愁起名字的人</title>
+    <link>https://qaqAdrian.github.io/tags/algorithm/</link>
+    <description>Recent content in Algorithm on 一个非常愁起名字的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 06 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://qaqAdrian.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《剑指Offer》读后总结</title>
+      <link>https://qaqAdrian.github.io/posts/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://qaqAdrian.github.io/posts/%E5%89%91%E6%8C%87offer%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;《剑指Offer》不知道这本书是怎样在我的圈子里火起来的，但确实写的很不错，我从头到尾读了一遍，总结一下这本书提到的那些算法和思想，以及面试技巧。《剑指Offer》使用的语言是C++，我主要是用Javascript或Java做算法题。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
