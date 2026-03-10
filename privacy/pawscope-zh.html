@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PawScope 隐私政策</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2328;
+      --muted: #59636e;
+      --line: #d0d7de;
+      --link: #0969da;
+      --card: #f6f8fa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #9da7b3;
+        --line: #30363d;
+        --link: #58a6ff;
+        --card: #161b22;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+    h1, h2, h3 {
+      line-height: 1.3;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+    }
+    h2 {
+      margin-top: 40px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h3 {
+      margin-top: 24px;
+      font-size: 18px;
+    }
+    p, li {
+      color: var(--fg);
+    }
+    .meta, .note {
+      color: var(--muted);
+    }
+    .summary {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 24px 0 32px;
+    }
+    a {
+      color: var(--link);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>PawScope 隐私政策</h1>
+    <p class="meta">最后更新：2026-03-10</p>
+
+    <div class="summary">
+      <p><strong>PawScope</strong> 是一款 macOS AI 助手，强调本地优先、用户授权和权限可控。</p>
+      <p>默认情况下，你的对话、配置和大多数运行数据会保存在你的 Mac 上，不会上传到我们的服务器。只有当你主动配置并使用第三方模型服务，或主动通过邮件向我们发送反馈时，相关数据才会离开你的设备。</p>
+    </div>
+
+    <h2>1. 适用范围</h2>
+    <p>本政策适用于 macOS 应用 <strong>PawScope</strong> 及其在本地设备上的运行行为。本政策不适用于你自行配置的第三方模型服务、邮件服务或其他外部服务，这些服务受其各自的隐私政策约束。</p>
+
+    <h2>2. 我们处理哪些数据</h2>
+
+    <h3>2.1 本地存储在你的 Mac 上的数据</h3>
+    <ul>
+      <li>对话、会话与 AI 回复内容。</li>
+      <li>任务执行历史，例如工具调用参数、执行结果、待办事项和运行状态。</li>
+      <li>你授权给应用访问的文件或文件夹路径，以及对应的安全作用域书签信息。</li>
+      <li>模型服务配置，例如服务名称、接口地址、模型 ID、请求头配置等。</li>
+      <li>应用设置，例如超时、重试次数、运行时长限制、自定义 AI 上下文和引导完成状态。</li>
+      <li>部分较大的运行状态或结果文件，可能保存在本机 <code>Application Support</code> 目录中。</li>
+      <li>本机诊断日志，可能包含模型请求/响应摘要、工具调用信息、错误信息和性能指标，用于本地排障与质量改进。</li>
+    </ul>
+
+    <h3>2.2 保存在本机钥匙串中的数据</h3>
+    <ul>
+      <li>你为模型服务配置的 API Key 或其他凭证会保存在 macOS Keychain 中，而不是保存在我们的服务器上。</li>
+    </ul>
+
+    <h3>2.3 发送给你自配第三方模型服务的数据</h3>
+    <p>当你使用自己配置的模型服务时，PawScope 可能会将以下数据发送给你选择的服务提供方：</p>
+    <ul>
+      <li>你当前输入的内容。</li>
+      <li>必要的历史对话上下文。</li>
+      <li>你在应用中设置的 AI 上下文提示。</li>
+      <li>与当前任务相关的工具结果，例如文件内容、PDF 文本、搜索结果或任务中间状态。</li>
+      <li>当前已授权给应用访问的路径状态信息，以便 AI 在权限范围内工作。</li>
+    </ul>
+    <p>如果你使用本地模型（例如本机运行的 Ollama），这些数据通常仍停留在你的设备或你控制的本地环境中；如果你使用云端模型服务，这些数据会发送到相应服务商。</p>
+
+    <h3>2.4 你主动发送给我们的数据</h3>
+    <ul>
+      <li>如果你使用反馈功能打开邮件客户端并发送邮件，邮件内容、主题和你主动提供的信息会通过你的邮件服务发送给我们。</li>
+    </ul>
+
+    <h2>3. 我们如何使用这些数据</h2>
+    <ul>
+      <li>在本地保存对话、任务状态和工具执行结果，以便你继续工作、查看历史记录和恢复上下文。</li>
+      <li>在你授权的文件或文件夹范围内执行搜索、读取、分析和其他任务。</li>
+      <li>使用你提供的模型服务配置发起 AI 请求。</li>
+      <li>在本机记录必要日志和运行信息，以帮助定位错误、分析性能并改进稳定性。</li>
+      <li>在你主动联系支持时处理你的反馈。</li>
+    </ul>
+
+    <h2>4. 文件访问与权限控制</h2>
+    <ul>
+      <li>PawScope 仅访问你通过系统选择器明确授权的文件或文件夹。</li>
+      <li>授权范围由你控制，你可以在应用内移除已授权路径。</li>
+      <li>在只读模式下，AI 仅能读取与分析内容，不能修改文件。</li>
+    </ul>
+
+    <h2>5. 我们不会做什么</h2>
+    <ul>
+      <li>我们不会把你的 API Key 上传到我们的服务器。</li>
+      <li>我们不会默认把你的对话、文件内容或项目数据上传到我们的服务器。</li>
+      <li>我们不会出售你的数据，也不会将其用于广告定向。</li>
+    </ul>
+    <p class="note">请注意：当你主动使用云端模型服务时，相关内容会发送到你所选择的服务提供方；这不属于我们运营的服务器处理范围。</p>
+
+    <h2>6. 数据保留与删除</h2>
+    <ul>
+      <li>大多数运行数据会保存在你的设备上，直到你在应用内删除相关对话、任务或配置。</li>
+      <li>卸载应用后，本地应用数据通常会被移除，但是否完全清理由 macOS 决定。</li>
+      <li>保存在 Keychain 中的凭证可能仍会保留，直到你在系统中删除它们。</li>
+      <li>如果你向我们发送邮件反馈，相关邮件会按我们的支持流程保留。</li>
+    </ul>
+
+    <h2>7. 你的选择</h2>
+    <ul>
+      <li>你可以选择只使用本地模型，避免将内容发送到云端模型服务。</li>
+      <li>你可以限制授权路径，只让 AI 访问当前任务所需的文件或文件夹。</li>
+      <li>你可以启用只读模式，降低误修改风险。</li>
+      <li>你可以删除本地对话、任务数据和模型配置。</li>
+    </ul>
+
+    <h2>8. 第三方服务</h2>
+    <p>PawScope 支持你自行配置的模型服务，例如本地部署模型、OpenAI 兼容接口或其他第三方 AI 服务。你使用这些服务时，相关数据处理将由对应服务商负责。使用前请阅读并理解其隐私政策与数据处理条款。</p>
+
+    <h2>9. 政策更新</h2>
+    <p>我们可能会在产品功能或数据处理方式变化时更新本政策。更新后的版本会在本页面发布，并标注最新更新时间。</p>
+
+    <h2>10. 联系我们</h2>
+    <p>如果你对本政策有疑问，或希望联系支持，请发送邮件至 <a href="mailto:yahaha7777@outlook.com">yahaha7777@outlook.com</a>。</p>
+  </main>
+</body>
+</html>
