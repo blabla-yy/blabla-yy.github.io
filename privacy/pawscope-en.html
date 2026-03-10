@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PawScope Privacy Policy</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2328;
+      --muted: #59636e;
+      --line: #d0d7de;
+      --link: #0969da;
+      --card: #f6f8fa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #9da7b3;
+        --line: #30363d;
+        --link: #58a6ff;
+        --card: #161b22;
+      }
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+    h1, h2, h3 {
+      line-height: 1.3;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+    }
+    h2 {
+      margin-top: 40px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h3 {
+      margin-top: 24px;
+      font-size: 18px;
+    }
+    .meta, .note {
+      color: var(--muted);
+    }
+    .summary {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 24px 0 32px;
+    }
+    a {
+      color: var(--link);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>PawScope Privacy Policy</h1>
+    <p class="meta">Last updated: 2026-03-10</p>
+
+    <div class="summary">
+      <p><strong>PawScope</strong> is a macOS AI assistant built around local-first behavior, user authorization, and permission-controlled actions.</p>
+      <p>By default, your conversations, configuration, and most runtime data stay on your Mac and are not uploaded to our servers. Data leaves your device only when you choose to use a third-party model service or when you intentionally send us feedback by email.</p>
+    </div>
+
+    <h2>1. Scope</h2>
+    <p>This policy applies to the macOS application <strong>PawScope</strong> and how it operates on your device. It does not govern third-party model providers, email providers, or other services you configure yourself; those services are subject to their own privacy policies.</p>
+
+    <h2>2. Data We Process</h2>
+
+    <h3>2.1 Data stored locally on your Mac</h3>
+    <ul>
+      <li>Conversations, sessions, and AI responses.</li>
+      <li>Task execution history, including tool arguments, tool results, to-do items, and runtime state.</li>
+      <li>Paths you authorize for file or folder access, together with the related security-scoped bookmark data.</li>
+      <li>Model service configuration such as service names, base URLs, model IDs, and request header settings.</li>
+      <li>App settings such as timeout values, retry counts, runtime limits, custom AI context, and onboarding state.</li>
+      <li>Some larger runtime state or result files, which may be stored in the local <code>Application Support</code> directory.</li>
+      <li>Local diagnostic logs that may include model request/response summaries, tool invocation details, error information, and performance metrics for local troubleshooting and quality improvement.</li>
+    </ul>
+
+    <h3>2.2 Data stored in the macOS Keychain</h3>
+    <ul>
+      <li>API keys or other credentials that you configure for model services are stored in the macOS Keychain, not on our servers.</li>
+    </ul>
+
+    <h3>2.3 Data sent to third-party model services you configure</h3>
+    <p>When you use a model service that you configure yourself, PawScope may send the following data to that provider:</p>
+    <ul>
+      <li>Your current input.</li>
+      <li>Relevant conversation history.</li>
+      <li>Your configured AI context prompt.</li>
+      <li>Task-related tool output, such as file content, PDF text, search results, or intermediate task state.</li>
+      <li>The current authorized-path status needed to keep AI actions within your granted permissions.</li>
+    </ul>
+    <p>If you use a local model, such as Ollama running on your own machine, this data will typically remain on your device or in your local environment. If you use a cloud model service, the data will be sent to that provider.</p>
+
+    <h3>2.4 Data you intentionally send to us</h3>
+    <ul>
+      <li>If you use the feedback flow that opens your mail app, the message content, subject line, and any information you choose to provide will be transmitted through your email provider and delivered to us.</li>
+    </ul>
+
+    <h2>3. How We Use Data</h2>
+    <ul>
+      <li>To store conversations, task state, and tool results locally so you can continue work, review history, and restore context.</li>
+      <li>To perform searches, reading, analysis, and other tasks within the files and folders you authorize.</li>
+      <li>To make AI requests using the model services you configure.</li>
+      <li>To keep local logs and runtime information needed for debugging, performance analysis, and stability improvements.</li>
+      <li>To process support requests when you contact us.</li>
+    </ul>
+
+    <h2>4. File Access and Permission Control</h2>
+    <ul>
+      <li>PawScope only accesses files and folders that you explicitly authorize through the system picker.</li>
+      <li>You control the scope of access and can remove authorized paths from within the app.</li>
+      <li>In read-only mode, the AI can inspect and analyze content but cannot modify files.</li>
+    </ul>
+
+    <h2>5. What We Do Not Do</h2>
+    <ul>
+      <li>We do not upload your API keys to our servers.</li>
+      <li>We do not, by default, upload your conversations, file content, or project data to our servers.</li>
+      <li>We do not sell your data or use it for advertising targeting.</li>
+    </ul>
+    <p class="note">Important: if you choose to use a cloud model provider, relevant content is sent to that provider. That transmission is part of the service you configured, not our own server-side data collection.</p>
+
+    <h2>6. Retention and Deletion</h2>
+    <ul>
+      <li>Most runtime data remains on your device until you delete the related conversations, tasks, or configurations.</li>
+      <li>When you uninstall the app, local app data is generally removed, subject to how macOS handles cleanup.</li>
+      <li>Credentials stored in the macOS Keychain may remain until you remove them manually.</li>
+      <li>If you send feedback by email, that correspondence may be retained as part of our support workflow.</li>
+    </ul>
+
+    <h2>7. Your Choices</h2>
+    <ul>
+      <li>You can choose to use only local models and avoid sending content to cloud model providers.</li>
+      <li>You can limit file permissions to only the folders or files needed for the current task.</li>
+      <li>You can enable read-only mode to reduce the risk of unintended file changes.</li>
+      <li>You can delete local conversations, task data, and model configuration.</li>
+    </ul>
+
+    <h2>8. Third-Party Services</h2>
+    <p>PawScope supports model services that you configure yourself, including local deployments, OpenAI-compatible endpoints, and other third-party AI providers. When you use those services, the relevant provider is responsible for its own data handling. Please review the provider's privacy policy and terms before use.</p>
+
+    <h2>9. Policy Updates</h2>
+    <p>We may update this policy when product features or data handling practices change. The latest version will be published on this page with an updated date.</p>
+
+    <h2>10. Contact</h2>
+    <p>If you have questions about this policy or need support, contact us at <a href="mailto:yahaha7777@outlook.com">yahaha7777@outlook.com</a>.</p>
+  </main>
+</body>
+</html>
