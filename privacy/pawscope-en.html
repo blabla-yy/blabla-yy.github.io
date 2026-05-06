@@ -74,15 +74,15 @@
 <body>
   <main>
     <h1>PawScope Privacy Policy</h1>
-    <p class="meta">Last updated: 2026-03-10</p>
+    <p class="meta">Last updated: 2026-04-28</p>
 
     <div class="summary">
       <p><strong>PawScope</strong> is a macOS AI assistant built around local-first behavior, user authorization, and permission-controlled actions.</p>
-      <p>By default, your conversations, configuration, and most runtime data stay on your Mac and are not uploaded to our servers. Data leaves your device only when you choose to use a third-party model service or when you intentionally send us feedback by email.</p>
+      <p>By default, your conversations, configuration, and most runtime data stay on your Mac. Data leaves your device when you choose to use a cloud model service, use the PawScope subscription service to access hosted AI models, sign in for subscription verification, or intentionally send us feedback by email.</p>
     </div>
 
     <h2>1. Scope</h2>
-    <p>This policy applies to the macOS application <strong>PawScope</strong> and how it operates on your device. It does not govern third-party model providers, email providers, or other services you configure yourself; those services are subject to their own privacy policies.</p>
+    <p>This policy applies to the macOS application <strong>PawScope</strong>, the PawScope subscription service used to access hosted AI models, and related account/subscription verification. It does not govern third-party model providers, email providers, Apple, RevenueCat, or other services you configure yourself; those services are subject to their own privacy policies.</p>
 
     <h2>2. Data We Process</h2>
 
@@ -113,7 +113,24 @@
     </ul>
     <p>If you use a local model, such as Ollama running on your own machine, this data will typically remain on your device or in your local environment. If you use a cloud model service, the data will be sent to that provider.</p>
 
-    <h3>2.4 Data you intentionally send to us</h3>
+    <h3>2.4 Data sent when you use the PawScope subscription service</h3>
+    <p>If you sign in and use the PawScope subscription service to access hosted AI models, PawScope may send the following data to our server infrastructure:</p>
+    <ul>
+      <li>Your Sign in with Apple identity token, used to authenticate your account and create a PawScope service token.</li>
+      <li>Subscription status information, including RevenueCat customer/subscription identifiers, entitlement status, product identifiers, and expiration dates needed to verify access.</li>
+      <li>Your current input, relevant conversation history, system or context prompts, tool definitions, tool call arguments/results, and task-related content needed to complete the AI request.</li>
+      <li>Request metadata such as a session-scoped conversation identifier, routing hints, selected model tier, estimated token usage, server response metadata, error codes, and operational logs needed for routing, abuse prevention, troubleshooting, and service reliability.</li>
+    </ul>
+    <p>The PawScope subscription service is hosted using Cloudflare infrastructure and may forward AI request content and related metadata to model providers selected by our routing service. These providers process the data to generate model responses and operate their services under their own terms and privacy policies.</p>
+
+    <h3>2.5 Subscription and purchase data</h3>
+    <ul>
+      <li>Purchases and subscriptions are processed by Apple through the App Store. We do not receive or store your full payment card number or Apple payment credentials.</li>
+      <li>We use RevenueCat to manage subscription entitlements, product offerings, purchase status, introductory offer eligibility, and subscription synchronization between the app and our server.</li>
+      <li>RevenueCat and Apple may process device, account, storefront, transaction, and diagnostic information as described in their own privacy policies.</li>
+    </ul>
+
+    <h3>2.6 Data you intentionally send to us</h3>
     <ul>
       <li>If you use the feedback flow that opens your mail app, the message content, subject line, and any information you choose to provide will be transmitted through your email provider and delivered to us.</li>
     </ul>
@@ -123,6 +140,8 @@
       <li>To store conversations, task state, and tool results locally so you can continue work, review history, and restore context.</li>
       <li>To perform searches, reading, analysis, and other tasks within the files and folders you authorize.</li>
       <li>To make AI requests using the model services you configure.</li>
+      <li>To authenticate your PawScope account, verify subscription entitlements, process renewals or expiration state, and provide access to hosted AI models through the PawScope subscription service.</li>
+      <li>To route AI requests, enforce service limits, prevent abuse, troubleshoot failures, and maintain reliability of the PawScope hosted model service.</li>
       <li>To keep local logs and runtime information needed for debugging, performance analysis, and stability improvements.</li>
       <li>To process support requests when you contact us.</li>
     </ul>
@@ -137,29 +156,35 @@
     <h2>5. What We Do Not Do</h2>
     <ul>
       <li>We do not upload your API keys to our servers.</li>
-      <li>We do not, by default, upload your conversations, file content, or project data to our servers.</li>
+      <li>We do not, by default, upload your conversations, file content, or project data to our servers unless you choose to use the PawScope subscription service or another cloud model service.</li>
       <li>We do not sell your data or use it for advertising targeting.</li>
+      <li>We do not receive or store your full App Store payment card information.</li>
     </ul>
-    <p class="note">Important: if you choose to use a cloud model provider, relevant content is sent to that provider. That transmission is part of the service you configured, not our own server-side data collection.</p>
+    <p class="note">Important: if you choose to use a cloud model provider or the PawScope subscription service for hosted AI models, relevant content is sent over the network and may be processed by our infrastructure and the selected model provider.</p>
 
     <h2>6. Retention and Deletion</h2>
     <ul>
       <li>Most runtime data remains on your device until you delete the related conversations, tasks, or configurations.</li>
       <li>When you uninstall the app, local app data is generally removed, subject to how macOS handles cleanup.</li>
       <li>Credentials stored in the macOS Keychain may remain until you remove them manually.</li>
+      <li>Service tokens, subscription verification records, request metadata, operational logs, and abuse-prevention records may be retained on our server infrastructure for as long as needed to provide the service, resolve issues, comply with legal obligations, and protect the service.</li>
+      <li>AI request content sent through the PawScope subscription service may be temporarily processed by our infrastructure and selected model providers to generate responses and operate the service.</li>
       <li>If you send feedback by email, that correspondence may be retained as part of our support workflow.</li>
     </ul>
 
     <h2>7. Your Choices</h2>
     <ul>
       <li>You can choose to use only local models and avoid sending content to cloud model providers.</li>
+      <li>You can choose not to sign in to PawScope or use the PawScope subscription service; in that case, hosted PawScope models will not be available.</li>
       <li>You can limit file permissions to only the folders or files needed for the current task.</li>
       <li>You can enable read-only mode to reduce the risk of unintended file changes.</li>
       <li>You can delete local conversations, task data, and model configuration.</li>
+      <li>You can manage or cancel your App Store subscription through your Apple account settings.</li>
     </ul>
 
     <h2>8. Third-Party Services</h2>
     <p>PawScope supports model services that you configure yourself, including local deployments, compatible endpoints, and other third-party AI providers. When you use those services, the relevant provider is responsible for its own data handling. Please review the provider's privacy policy and terms before use.</p>
+    <p>For PawScope subscriptions and hosted AI access, we use third-party services including Apple App Store / Sign in with Apple, RevenueCat for subscription entitlement management, Cloudflare for server infrastructure, and selected AI model providers for model inference. These services may process data as described in their own policies.</p>
 
     <h2>9. Policy Updates</h2>
     <p>We may update this policy when product features or data handling practices change. The latest version will be published on this page with an updated date.</p>
