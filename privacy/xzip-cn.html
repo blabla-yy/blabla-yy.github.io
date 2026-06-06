@@ -1,76 +1,67 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- <style type="text/css">
-      .roman {
-        list-style-type: lower-roman;
-      }
-      .square {
-        list-style-type: square;
-        margin-left: -2em;
-      }
-    </style> -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
-      rel="stylesheet"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
-    />
-    <meta charset="utf-8" />
-    <title>xZip Privacy</title>
-  </head>
-  <body>
-    <div id="app">
-      <v-app>
-        <v-content>
-          <v-container
-            ><div data-v-ad817de0="" class="v-card__title text-h4 my-4 mx-2">
-              xZip 隐私政策
-            </div>
-            <div
-              data-v-ad817de0=""
-              class="ml-6 mr-2 text-body-1 mb-4"
-              style="text-indent: 2em"
-            >
-              xZip 隐私政策 xZip尊重并保护所有使用服务用户的个人隐私权。
-              xZip不会使用您的任何个人信息。 xZip会不时更新本隐私权政策。
-              您在同意xZip服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于xZip服务使用协议不可分割的一部分。
-              <ul class="roman">
-                <li>1.适用范围</li>
-                <ul class="square">
-                  <li>a)xZip不会记录您的任何类型的个人信息。</li>
-                  <li>
-                    b)xZip中用户生产数据全部保存在本地；
-                  </li>
-                </ul>
-                <li>2.信息的使用</li>
-                <ul class="square">
-                  <li>a)无</li>
-                </ul>
-              </ul>
-            </div>
-            <!----><!----><!----><!----><!----><!---->
-          </v-container>
-        </v-content>
-      </v-app>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script>
-      new Vue({
-        el: "#app",
-        vuetify: new Vuetify(),
-      });
-    </script>
-  </body>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>xZip 隐私政策</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            line-height: 1.8;
+            color: #1d1d1f;
+            background: #fff;
+        }
+        h1 { font-size: 1.8em; margin-bottom: 0.3em; }
+        h2 { font-size: 1.2em; margin-top: 1.8em; color: #333; }
+        p, li { font-size: 1em; color: #444; }
+        ul { padding-left: 1.5em; }
+        .updated { font-size: 0.85em; color: #888; margin-bottom: 2em; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>xZip 隐私政策</h1>
+    <p class="updated">最后更新：2026 年 6 月 6 日</p>
+
+    <p>xZip（以下简称"本应用"）由独立开发者开发。我们致力于保护您的隐私。本政策说明本应用访问哪些数据以及如何处理这些数据。</p>
+
+    <h2>1. 我们不收集的数据</h2>
+    <p>我们不收集、存储或分享任何可识别个人身份的信息。本应用无需注册账号，不追踪您的身份，不使用广告 SDK。</p>
+
+    <h2>2. 匿名使用统计</h2>
+    <p>本应用使用 <a href="https://telemetrydeck.com">TelemetryDeck</a>（一个注重隐私保护的分析服务）收集匿名使用统计数据，以帮助我们了解应用的使用情况并持续改进。</p>
+    <p>收集的数据包括：</p>
+    <ul>
+        <li>打开的压缩包格式类型（如 ZIP、RAR、7z）</li>
+        <li>操作成功/失败率</li>
+        <li>一般使用模式</li>
+    </ul>
+    <p>这些数据完全匿名——不包含设备标识符、IP 地址或任何个人信息，无法用于识别您的身份。TelemetryDeck 符合 GDPR 规定，不会向第三方出售或分享数据。</p>
+
+    <h2>3. 本地存储</h2>
+    <p>本应用使用系统标准存储（UserDefaults）在您的设备上本地保存用户偏好设置和最近文件记录。这些数据不会离开您的设备。</p>
+
+    <h2>4. 应用内购买</h2>
+    <p>购买完全通过 Apple 的 StoreKit 处理。我们不会接收、存储或访问任何支付信息、信用卡号或 Apple ID 详细信息。</p>
+
+    <h2>5. 文件访问</h2>
+    <p>本应用仅访问您明确选择或打开的文件。所有压缩包处理完全在您的设备上进行——不会将任何文件上传到任何服务器。</p>
+
+    <h2>6. 第三方服务</h2>
+    <p>唯一使用的第三方服务是 TelemetryDeck（如上所述）。未集成任何其他分析、广告或追踪服务。</p>
+
+    <h2>7. 儿童隐私</h2>
+    <p>本应用不会有意收集任何儿童数据。由于我们不收集任何用户的个人数据，因此无需特殊措施。</p>
+
+    <h2>8. 政策变更</h2>
+    <p>我们可能会不时更新本政策。变更将在此页面上反映，并更新日期。</p>
+
+    <h2>9. 联系方式</h2>
+    <p>如果您对本隐私政策有任何疑问，请联系我们：<br>
+    <a href="mailto:yahaha7777@outlook.com">yahaha7777@outlook.com</a></p>
+</body>
 </html>
