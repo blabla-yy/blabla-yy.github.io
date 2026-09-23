@@ -26,21 +26,26 @@
 </head>
 <body>
     <h1>Lessonday Privacy Policy</h1>
-    <p class="updated">Last updated: 2026-09-02</p>
+    <p class="updated">Last updated: 2026-09-24</p>
 
-    <p>Lessonday ("the App") is an iPhone app for independent teachers, tutors and coaches, developed by an independent developer ("we", "us"). The App has no accounts and no servers of ours. Your lessons and your students stay on your iPhone, and — if you choose to turn on sync — in your own private iCloud database. This policy explains exactly what the App does with data.</p>
+    <p>Lessonday ("the App") is an iPhone app for independent teachers, tutors and coaches, developed by an independent developer ("we", "us"). The App has no accounts, and we run no server that stores your lessons or students. Your lessons and your students stay on your iPhone, and — if you choose to turn on sync — in your own private iCloud database. This policy explains exactly what the App does with data.</p>
 
-    <h2>1. We Collect Nothing</h2>
-    <p>We do not operate a server that receives your data. We do not have an account system, so there is nothing for us to associate data with. There is no analytics SDK, no advertising SDK, and no crash-reporting service embedded in the App. No information about you or your students is transmitted to us or to any third party.</p>
-    <p>Because of this, the sections below describe data that stays on your device or in your own iCloud account — not data we receive.</p>
+    <h2>1. Summary</h2>
+    <ul>
+        <li>Your student and lesson records — names, locations, lesson plans, lesson notes — live only on your device and in your own iCloud. We cannot see them, and they are never sent to anyone.</li>
+        <li>By default the App sends <strong>anonymous usage statistics</strong> (which features are used, whether a step succeeded). They contain nothing you have entered, and you can turn them off at any time under Settings &rarr; Privacy &rarr; Share Usage Data. See Section 8.</li>
+        <li>Only when you choose to send feedback does what you write, plus a little technical information, go to the feedback channel you pick. See Section 9.</li>
+        <li>AI suggestions are generated entirely on your device, with no network connection. See Section 7.</li>
+    </ul>
 
     <h2>2. Data Stored on Your iPhone</h2>
     <p>Everything you enter is written to a local database on your device:</p>
     <ul>
         <li>Students you create: the name you type, the subject you teach them, the goals or background you write, and the hourly rate you set.</li>
         <li>Lessons: date and time, duration, the location you chose, what you planned to cover, and any note you write afterwards.</li>
-        <li>Your own settings: default hourly rate, currency, reminder preferences and similar options, stored in the system's standard preferences store.</li>
+        <li>Your own settings: default hourly rate, reminder preferences, whether to share usage data and similar options, stored in the system's standard preferences store.</li>
     </ul>
+    <p>The database sits in an on-device container that the App shares with its widget, so the "Next lesson" widget on your Home Screen and Lock Screen can show what comes next. The widget reads this data on your device only and sends it nowhere.</p>
     <p>Note that the "students" in the App are your records about the people you teach. You decide what to type in. We never see any of it.</p>
 
     <h2>3. iCloud Sync (Optional)</h2>
@@ -60,28 +65,53 @@
     <h2>6. Notifications</h2>
     <p>If you allow notifications, the App schedules lesson reminders locally on your device. These are local notifications only. We do not operate a push server and cannot send you anything.</p>
 
-    <h2>7. What the App Does Not Do</h2>
+    <h2>7. AI Suggestions</h2>
+    <p>"Generate lesson plan with AI" and "Generate comment ideas with AI" use Apple Intelligence's <strong>on-device model</strong>. They run entirely on your device and connect to no server. What the model is given is the lesson's teaching type, the student's name and background, the lesson plan so far, and any request you type; if "Share recent lessons with AI" is on (it is on by default and can be turned off), it also gets the plans and feedback from that student's last few lessons. All of this is handed to the model on your device only and is never sent to us, to Apple or to any third party. On devices that do not support Apple Intelligence, these features are unavailable.</p>
+
+    <h2>8. Usage Statistics</h2>
+    <p>To learn which features are actually useful and which steps keep failing, the App by default sends anonymous usage statistics through <a href="https://telemetrydeck.com/privacy/">TelemetryDeck</a>, a privacy-focused analytics service provided by TelemetryDeck GmbH in Germany.</p>
+    <ul>
+        <li><strong>What is sent</strong>: that a feature was used (for example, a lesson was created, a lesson review was finished, a tab was opened), counts and status flags (for example, "the booking parser found the time but not the location", "the AI returned four items"), and the type of error when something fails.</li>
+        <li><strong>Basic information sent with it</strong>: app version, OS version, device model, system language and region, and a random identifier that is hashed on your device, used only to tell repeated use of the same device apart. It cannot be traced back to your device, your Apple Account or you, and it is not linked to any of your records.</li>
+        <li><strong>Never sent</strong>: student names, lesson locations, booking text, lesson plans, lesson notes, the names of teaching types you create, or anything else you have entered.</li>
+        <li><strong>How to turn it off</strong>: switch off Settings &rarr; Privacy &rarr; Share Usage Data. One final "turned off" signal is sent at that moment, and nothing is sent after that.</li>
+    </ul>
+    <p>These statistics are not used for advertising, not used to track you across other apps or websites, and are not sold or given to anyone.</p>
+
+    <h2>9. Feedback</h2>
+    <p>When you tap "Send Feedback" in Settings, you choose whether to send it through a Feishu form, a Google form, or email. Nothing is sent unless you submit it yourself:</p>
+    <ul>
+        <li>The form comes pre-filled with some technical information: app version, OS version, device model identifier (for example iPhone17,2), and an error code when you are reporting an error. You can review and edit it before submitting.</li>
+        <li>What you write and submit goes to the party you chose (Feishu, Google, or your email provider) and is governed by its privacy policy.</li>
+        <li>We use feedback only to reply to you, fix problems and improve the App.</li>
+    </ul>
+
+    <h2>10. What the App Does Not Do</h2>
     <ul>
         <li>It does not require an account, an email address or a phone number.</li>
-        <li>It does not contain analytics, advertising or tracking of any kind, and does not track you across other apps or websites.</li>
-        <li>It does not sell, share or transfer data to anyone.</li>
+        <li>It does not contain advertising, and does not track you across other apps or websites.</li>
+        <li>It does not sell or share your student and lesson records.</li>
         <li>It does not have in-app purchases and receives no payment information.</li>
         <li>It is not a platform your students log into. Your students have no access to the App and no account in it.</li>
     </ul>
 
-    <h2>8. Third-Party Services</h2>
-    <p>The App integrates no third-party services. The only external party involved is Apple, which distributes the App through the App Store and provides the iCloud storage described in Section 3.</p>
+    <h2>11. Third-Party Services</h2>
+    <ul>
+        <li><strong>Apple</strong> distributes the App through the App Store and provides the iCloud storage described in Section 3 and the on-device model described in Section 7.</li>
+        <li><strong>TelemetryDeck</strong> receives the anonymous usage statistics described in Section 8, and receives nothing once you turn them off.</li>
+        <li><strong>Feishu and Google</strong> are involved only if you choose to send feedback through their forms; see Section 9.</li>
+    </ul>
 
-    <h2>9. Children's Privacy</h2>
-    <p>The App is a professional tool intended for adults who teach. It does not knowingly collect personal data from children. If you keep records about students who are minors, those records are yours: they remain on your device and in your own iCloud account, and are never transmitted to us.</p>
+    <h2>12. Children's Privacy</h2>
+    <p>The App is a professional tool intended for adults who teach. It does not knowingly collect personal data from children. If you keep records about students who are minors, those records are yours: they remain on your device and in your own iCloud account, are never transmitted to us, and never appear in usage statistics.</p>
 
-    <h2>10. Deleting Your Data</h2>
-    <p>You can delete any student or lesson from within the App at any time. Deleting the App from your iPhone removes the local database with it. If you enabled sync, you can additionally remove the App's stored data from your iCloud account in the iOS Settings app, under your Apple Account &rarr; iCloud &rarr; Manage Account Storage. Because we hold nothing, there is no request you need to send us to have data erased.</p>
+    <h2>13. Deleting Your Data</h2>
+    <p>You can delete any student or lesson from within the App at any time. Deleting the App from your iPhone removes the local database with it. If you enabled sync, you can additionally remove the App's stored data from your iCloud account in the iOS Settings app, under your Apple Account &rarr; iCloud &rarr; Manage Account Storage. We hold none of your student or lesson records; usage statistics are anonymous and cannot be matched to a person, and switching off Share Usage Data stops them. To have feedback you sent us deleted, contact us at the address below.</p>
 
-    <h2>11. Policy Updates</h2>
+    <h2>14. Policy Updates</h2>
     <p>We may update this policy as the App's features change. The latest version will be published on this page with an updated date.</p>
 
-    <h2>12. Contact</h2>
+    <h2>15. Contact</h2>
     <p>If you have questions about this policy, please contact us at:<br>
     <a href="mailto:yahaha7777@outlook.com">yahaha7777@outlook.com</a></p>
 </body>
