@@ -26,12 +26,13 @@
 </head>
 <body>
     <h1>Tidium Privacy Policy</h1>
-    <p class="updated">Last updated: 2026-07-30</p>
+    <p class="updated">Last updated: 2026-09-23</p>
 
-    <p>Tidium ("the App") is a macOS file organizing tool developed by an independent developer ("we", "us"). We built Tidium to be local-first: your files and their contents stay on your Mac. This policy explains what data the App processes and how.</p>
+    <p>Tidium ("the App") is a macOS file organizing tool developed by an independent developer ("we", "us"). We built Tidium to be local-first: by default, your files and their contents stay on your Mac. This policy explains what data the App processes and how.</p>
 
-    <h2>1. We Do Not Upload Your Files</h2>
+    <h2>1. Your Files Stay on Your Mac by Default</h2>
     <p>Tidium reads and organizes files only within folders you explicitly grant access to via the system file picker (macOS sandboxing). File content is analyzed on-device using Apple's on-device AI (Apple Intelligence / Foundation Models) or, where that is unavailable, a locally run model. We do not upload your file content, file names, or folder structure to our servers or to any third party. This is separate from the limited, anonymous usage analytics described in Section 3, which never includes file content, names, or paths.</p>
+    <p><strong>Optional: Apple's cloud model (Private Cloud Compute).</strong> On macOS 27 or later, subscribers can choose Apple's cloud model in the App's AI settings instead of the on-device model. It is off by default and is never selected for you. While it is selected, the file names and the text the App extracts from your files are sent to Apple's Private Cloud Compute servers to generate organizing, renaming and cleanup suggestions. This data goes to Apple, not to us: we never receive it. Apple processes it under its own privacy terms for Private Cloud Compute, which state that the data is used only to fulfill the request and is not stored or made accessible to Apple. Usage counts against a daily allowance tied to your iCloud account. If the allowance runs out or the network is unavailable, the App finishes the task with the on-device model. Switching back to the on-device model in AI settings stops any further data from being sent.</p>
 
     <h2>2. Data Stored Locally on Your Mac</h2>
     <ul>
@@ -59,7 +60,7 @@
 
     <h2>5. What We Do Not Do</h2>
     <ul>
-        <li>We do not collect or upload your file contents, file names, or folder structure — not even as part of the anonymous analytics described in Section 3.</li>
+        <li>We do not collect your file contents, file names, or folder structure — not even as part of the anonymous analytics described in Section 3. The only case where file names and extracted text leave your Mac is the optional cloud model described in Section 1, and that data goes to Apple, not to us.</li>
         <li>We do not sell your data or use it for advertising.</li>
         <li>We do not track you across other apps or websites.</li>
         <li>We do not receive or store your full App Store payment information.</li>
@@ -73,7 +74,7 @@
     </ul>
 
     <h2>7. Third-Party Services</h2>
-    <p>Tidium relies on the Apple App Store for distribution and billing, RevenueCat for subscription entitlement management, and TelemetryDeck for the anonymous usage analytics described in Section 3. These services may process data as described in their own privacy policies.</p>
+    <p>Tidium relies on the Apple App Store for distribution and billing, RevenueCat for subscription entitlement management, TelemetryDeck for the anonymous usage analytics described in Section 3, and, only if you select it, Apple Private Cloud Compute as described in Section 1. If you choose to send feedback through a web form, it is handled by Google Forms or Feishu (Lark) Forms, depending on which one you pick; the form is anonymous and is prefilled only with the App version, the current mode and the number of files, which you can review before submitting. These services may process data as described in their own privacy policies.</p>
 
     <h2>8. Children's Privacy</h2>
     <p>Tidium does not knowingly collect personal data from children. Since we do not collect personal data from any user in the course of normal operation, no additional measures are required.</p>
